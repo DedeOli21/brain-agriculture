@@ -1,4 +1,4 @@
-import { Farm } from '../../farm.entity';
+import { Farm } from '../../../../../domain/farms/farm.entity';
 
 export class FindAllFarmResponseDto {
   data: Farm[];

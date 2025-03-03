@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Crop } from './crop.entity';
-// import { CropController } from './crop.controller';
-import { CropsService } from './crops.service';
+import { Season } from '../season/season.entity';
+import { CropsController } from './crops.controller';
+// import { CropRepository } from './repositories/crop.repository';
+import { CreateCropUseCase } from './crops.service';
+import { SeasonRepository } from '../season/season.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Crop])],
-  controllers: [],
-  providers: [CropsService],
-  exports: [CropsService],
+  imports: [TypeOrmModule.forFeature([Crop, Season])],
+  controllers: [CropsController],
+  providers: [SeasonRepository, CreateCropUseCase],
+  exports: [CreateCropUseCase],
 })
 export class CropsModule {}

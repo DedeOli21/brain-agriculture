@@ -16,37 +16,34 @@ export class DashboardService {
   ) {}
 
   async getDashboard(): Promise<DashboardResponseDto> {
-    // 1️⃣ Total de fazendas cadastradas
     const totalFarms = await this.farmRepository.count();
 
-    // 2️⃣ Total de hectares registrados
     const totalHectares = await this.farmRepository
       .createQueryBuilder('farm')
       .select('SUM(farm.totalArea)', 'total')
       .getRawOne();
 
-    // 3️⃣ Gráfico: Distribuição de fazendas por estado
     const farmsByState = await this.farmRepository
       .createQueryBuilder('farm')
       .select('farm.state, COUNT(*) as count')
       .groupBy('farm.state')
       .getRawMany();
 
-    // 4️⃣ Gráfico: Distribuição por cultura plantada
     const cropsDistribution = await this.cropRepository
       .createQueryBuilder('crop')
       .select('crop.name, COUNT(*) as count')
       .groupBy('crop.name')
       .getRawMany();
 
-    // 5️⃣ Gráfico: Uso do solo (área agricultável x vegetação)
     const landUsage = await this.farmRepository
       .createQueryBuilder('farm')
       .select([
         `SUM(farm.arableArea) as arableArea`,
         `SUM(farm.vegetationArea) as vegetationArea`,
       ])
-      .getRawOne();
+      .groupBy('farm.id')
+      .getRawOne()
+
 
     return {
       totalFarms,
@@ -54,8 +51,8 @@ export class DashboardService {
       farmsByState,
       cropsDistribution,
       landUsage: [
-        { type: 'Área Agricultável', area: landUsage.arableArea || 0 },
-        { type: 'Área de Vegetação', area: landUsage.vegetationArea || 0 },
+        { type: 'Área Agricultável', area: landUsage.arablearea || 0 },
+        { type: 'Área de Vegetação', area: landUsage.vegetationarea || 0 },
       ],
     };
   }

@@ -7,6 +7,7 @@ import { Producer } from './domain/producers/producer.entity';
 import { DomainModule } from './domain/domain.module';
 import { Harvest } from './domain/harvest/harvest.entity';
 import { Season } from './domain/season/season.entity';
+import { ApplicationModule } from './application/application.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { Season } from './domain/season/season.entity';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    DomainModule,
+    ApplicationModule,
+    DomainModule
   ],
   controllers: [],
   providers: [],

@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { IProducerRepository } from 'src/application/producers.interface';
+import { IProducerRepository } from 'src/application/interfaces/producers.repository.interface';
 import { Producer } from 'src/domain/producers/producer.entity';
 import { Repository } from 'typeorm';
 

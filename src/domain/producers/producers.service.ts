@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { isValidDocumentToProducer } from '../../shared/helpers/is-valid-document-to-producer';
-import { IProducerRepository } from 'src/application/producers.interface';
+import { IProducerRepository } from 'src/application/interfaces/producers.repository.interface';
 import { CreateProducerRequestDto } from './dto/request/create-request.dto';
 import { FindOneProducerResponseDto } from './dto/response/findOne-reponse.dto';
 

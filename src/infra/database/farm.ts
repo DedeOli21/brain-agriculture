@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { IFarmRepository } from 'src/application/farms.interface';
+import { IFarmRepository } from 'src/application/use-cases/farms/farms.interface';
 import { Farm } from 'src/domain/farms/farm.entity';
 import { Repository } from 'typeorm';
 
