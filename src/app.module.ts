@@ -4,9 +4,9 @@ import { ConfigModule } from '@nestjs/config';
 import { Crop } from './domain/crops/crop.entity';
 import { Farm } from './domain/farms/farm.entity';
 import { Producer } from './domain/producers/producer.entity';
-import { HarvestToCrop } from './domain/harvest-to-crop /harvest-to-crop.entity';
-import { Harvest } from './domain/harverst/harvest.entity';
 import { DomainModule } from './domain/domain.module';
+import { Harvest } from './domain/harvest/harvest.entity';
+import { Season } from './domain/season/season.entity';
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { DomainModule } from './domain/domain.module';
       username: 'admin',
       password: 'password',
       database: 'brain_agriculture',
-      entities: [Crop, Farm, Producer, HarvestToCrop, Harvest],
+      entities: [Crop, Farm, Producer, Harvest, Season],
       autoLoadEntities: true,
       synchronize: true,
     }),

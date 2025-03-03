@@ -9,5 +9,4 @@ import { DatabaseModule } from 'src/infra/database/database.module';
   exports: [ProducersService],
   controllers: [ProducersController],
 })
-
 export class ProducersModule {}
