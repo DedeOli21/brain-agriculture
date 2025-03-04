@@ -12,18 +12,12 @@ export class CreateHarvestUseCase {
   ) {}
 
   async execute(data: CreateHarvestDto): Promise<CreateHarvestResponseDto> {
-    // Validar se a cultura existe
-
-    console.log('data', data);
     const crop = await this.cropRepository.findById(data.cropId);
 
-    console.log('crop', crop);
     if (!crop) {
-      console.log('crop not found');
       throw new NotFoundException('Cultura não encontrada');
     }
 
-    // Criar a colheita
     const harvest = await this.harvestRepository.create({
       amount: data.amount,
       harvestDate: data.harvestDate,

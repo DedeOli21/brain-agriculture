@@ -17,14 +17,13 @@ module.exports = {
       }
     },
     collectCoverage: true,
-    collectCoverageFrom: [
-      'src/**/*.{ts,js}',
-      '!src/domain/entities/**',
-      '!src/migrations/**',
-    ],
     coveragePathIgnorePatterns: [
-      '/node_modules/',
-      'src/domain/entities/',
-    ],
+      "/node_modules/",
+      "src/domain/entities/",  // Ignora entities
+      "src/migrations/",       // Ignora migrations
+      "src/config/",           // Ignora arquivos de configuração
+      "src/main.ts",           // Ignora a inicialização do app
+      "src/shared/base.entity.ts"
+    ]
 };
   

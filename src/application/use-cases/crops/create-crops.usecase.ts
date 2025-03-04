@@ -14,7 +14,6 @@ export class CreateCropUseCase {
   async execute(data: CreateCropDto): Promise<Crop> {
     // Validar se a safra existe
 
-    console.log('data', data);
     const season = await this.seasonRepository.findById({ id: data.seasonId });
     if (!season) {
       throw new NotFoundException('Safra não encontrada');
