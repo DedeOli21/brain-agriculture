@@ -33,7 +33,6 @@ export class CreateFarmUseCase {
     arableArea: number,
     vegetationArea: number,
   ): boolean {
-    console.log([totalArea, arableArea, vegetationArea]);
     return totalArea >= arableArea + vegetationArea;
   }
 }

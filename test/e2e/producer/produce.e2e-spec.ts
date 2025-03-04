@@ -71,19 +71,12 @@ describe('E2E Test for All Routes', () => {
   });
 
   it('[GET] /producers', async () => {
-    const createProducerDto: CreateProducerRequestDto = {
-      name: 'Valid Name',
-      document: '40346105064', // random CPF
-
-    };
-
     const response = await request(app.getHttpServer())
       .get('/producers')
       .expect(200);
 
     expect(response.body.length).toBeGreaterThan(0);
   });
-
 
   it('[GET] /producers/:document', async () => {
     const createProducerDto: CreateProducerRequestDto = {
@@ -139,9 +132,7 @@ describe('E2E Test for All Routes', () => {
   });
 
   it('[GET] /producers/:id - should return 500 if producer does not exist', async () => {
-    await request(app.getHttpServer())
-      .get('/producers/by-id/123')
-      .expect(500);
+    await request(app.getHttpServer()).get('/producers/by-id/123').expect(500);
   });
 
   it('[GET] /producers/:document - should return erro if producer does not exist', async () => {

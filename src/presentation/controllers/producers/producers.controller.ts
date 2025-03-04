@@ -34,7 +34,6 @@ export class ProducersController {
 
   @Get('/by-id/:id')
   findProducerById(@Param('id') id: string): Promise<Producer> {
-    console.log('id', id);
     return this.findByIdProducerUSeCase.execute(id);
   }
 }

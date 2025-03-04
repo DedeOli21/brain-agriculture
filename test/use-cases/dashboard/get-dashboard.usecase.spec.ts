@@ -107,4 +107,33 @@ describe('GetDashboardUseCase', () => {
       ],
     });
   });
+
+  it('should return totalArea as 0 if totalArea is null', async () => {
+    const totalFarms = 10;
+    const totalHectares = { total: null };
+    const farmsByState = [
+      { state: 'State1', count: 5 },
+      { state: 'State2', count: 5 },
+    ];
+    const cropsDistribution = [
+      { name: 'Crop1', count: 6 },
+      { name: 'Crop2', count: 4 },
+    ];
+    const landUsage = { arableArea: 600, vegetationArea: 400 };
+
+    jest.spyOn(farmRepository, 'totalArea').mockResolvedValue({ total: null });
+
+    const result: DashboardResponseDto = await getDashboardUseCase.execute();
+
+    expect(result).toEqual({
+      totalFarms,
+      totalHectares: 0,
+      farmsByState,
+      cropsDistribution,
+      landUsage: [
+        { type: 'Área Agricultável', area: landUsage.arableArea },
+        { type: 'Área de Vegetação', area: landUsage.vegetationArea },
+      ],
+    });
+  });
 });

@@ -15,6 +15,16 @@ module.exports = {
       "ts-jest": {
         "tsconfig": "tsconfig.jest.json"
       }
-    }
+    },
+    collectCoverage: true,
+    collectCoverageFrom: [
+      'src/**/*.{ts,js}',
+      '!src/domain/entities/**',
+      '!src/migrations/**',
+    ],
+    coveragePathIgnorePatterns: [
+      '/node_modules/',
+      'src/domain/entities/',
+    ],
 };
   

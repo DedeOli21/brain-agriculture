@@ -1,4 +1,4 @@
-import { config } from '../../datasource';
+import { config } from '@config/datasource';
 import { newDb, DataType } from 'pg-mem';
 import { DataSource } from 'typeorm';
 import { v4 } from 'uuid';
@@ -30,10 +30,7 @@ export const setupDataSource = async () => {
 
   const ds: DataSource = await db.adapters.createTypeormDataSource(config);
   await ds.initialize();
-  console.log(
-    'Entidades carregadas:',
-    ds.entityMetadatas.map((e) => e.name),
-  );
+
   await ds.synchronize();
 
   return ds;
