@@ -1,6 +1,6 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { IProducerRepository } from 'src/application/interfaces/producers.repository.interface';
-import { Producer } from 'src/domain/producers/producer.entity';
+import { IProducerRepository } from 'src/domain/interfaces/producers.repository.interface';
+import { Producer } from 'src/domain/entities/producers/producer.entity';
 import { Repository } from 'typeorm';
 
 export class ProducerImplementation implements IProducerRepository {

@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { ICropRepository } from 'src/application/interfaces/crop.repository.interface';
-import { IHarvestRepository } from 'src/application/interfaces/harvest.repository.interface';
+import { ICropRepository } from 'src/domain/interfaces/crop.repository.interface';
+import { IHarvestRepository } from 'src/domain/interfaces/harvest.repository.interface';
 import { CreateHarvestDto } from './dto/create-harvest.dto';
 import { CreateHarvestResponseDto } from './dto/create-harvest-response.dto';
 

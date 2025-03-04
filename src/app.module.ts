@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { Crop } from './domain/crops/crop.entity';
-import { Farm } from './domain/farms/farm.entity';
-import { Producer } from './domain/producers/producer.entity';
-import { DomainModule } from './domain/domain.module';
-import { Harvest } from './domain/harvest/harvest.entity';
-import { Season } from './domain/season/season.entity';
+import { Crop } from './domain/entities/crops/crop.entity';
+import { Farm } from './domain/entities/farms/farm.entity';
+import { Producer } from './domain/entities/producers/producer.entity';
+import { Harvest } from './domain/entities/harvest/harvest.entity';
+import { Season } from './domain/entities/season/season.entity';
 import { ApplicationModule } from './application/application.module';
+import { PresentationModule } from './presentation/presentation.module';
 
 @Module({
   imports: [
@@ -19,12 +19,12 @@ import { ApplicationModule } from './application/application.module';
       username: 'admin',
       password: 'password',
       database: 'brain_agriculture',
-      entities: [Crop, Farm, Producer, Harvest, Season],
+      entities: [Producer, Farm, Season, Crop, Harvest],
       autoLoadEntities: true,
       synchronize: true,
     }),
     ApplicationModule,
-    DomainModule
+    PresentationModule,
   ],
   controllers: [],
   providers: [],

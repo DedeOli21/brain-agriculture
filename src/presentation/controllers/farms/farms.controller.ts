@@ -8,7 +8,10 @@ import { CreateFarmResponseDto } from './dto/response/create-request.dto';
 
 @Controller('farms')
 export class FarmsController {
-  constructor(private readonly createFarmUsecase: CreateFarmUseCase, private readonly findAllFarmUsecase: FindAllFarmUseCase) {}
+  constructor(
+    private readonly createFarmUsecase: CreateFarmUseCase,
+    private readonly findAllFarmUsecase: FindAllFarmUseCase,
+  ) {}
 
   @Get()
   async findAll(
