@@ -32,7 +32,11 @@ describe('FindAllFarmUseCase', () => {
   });
 
   it('should call findAll on farmRepository with correct query', async () => {
-    const query: FindAllFarmQueryRequestDto = { farmId: '123', take: 10, skip: 1 };
+    const query: FindAllFarmQueryRequestDto = {
+      farmId: '123',
+      take: 10,
+      skip: 1,
+    };
     const response: FindAllFarmResponseDto = { count: 2, data: [] };
 
     jest.spyOn(farmRepository, 'findAll').mockResolvedValue(response);
@@ -45,8 +49,12 @@ describe('FindAllFarmUseCase', () => {
   it('should throw an error if farmRepository.findAll fails', async () => {
     const query: FindAllFarmQueryRequestDto = { skip: 1, take: 10 };
 
-    jest.spyOn(farmRepository, 'findAll').mockRejectedValue(new Error('Failed to fetch farms'));
+    jest
+      .spyOn(farmRepository, 'findAll')
+      .mockRejectedValue(new Error('Failed to fetch farms'));
 
-    await expect(findAllFarmUseCase.execute(query)).rejects.toThrow('Failed to fetch farms');
+    await expect(findAllFarmUseCase.execute(query)).rejects.toThrow(
+      'Failed to fetch farms',
+    );
   });
 });

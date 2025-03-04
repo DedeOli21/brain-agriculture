@@ -1,11 +1,11 @@
-import { CreateHarvestUseCase } from "@app/use-cases/harvest/create-harvest.usecase";
-import { CreateHarvestDto } from "@app/use-cases/harvest/dto/create-harvest.dto";
-import { Crop } from "@domain/entities/crops/crop.entity";
-import { Harvest } from "@domain/entities/harvest/harvest.entity";
-import { ICropRepository } from "@domain/interfaces/crop.repository.interface";
-import { IHarvestRepository } from "@domain/interfaces/harvest.repository.interface";
-import { NotFoundException } from "@nestjs/common";
-import { Test, TestingModule } from "@nestjs/testing";
+import { CreateHarvestUseCase } from '@app/use-cases/harvest/create-harvest.usecase';
+import { CreateHarvestDto } from '@app/use-cases/harvest/dto/create-harvest.dto';
+import { Crop } from '@domain/entities/crops/crop.entity';
+import { Harvest } from '@domain/entities/harvest/harvest.entity';
+import { ICropRepository } from '@domain/interfaces/crop.repository.interface';
+import { IHarvestRepository } from '@domain/interfaces/harvest.repository.interface';
+import { NotFoundException } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CreateHarvestUseCase', () => {
   let createHarvestUseCase: CreateHarvestUseCase;
@@ -31,7 +31,8 @@ describe('CreateHarvestUseCase', () => {
       ],
     }).compile();
 
-    createHarvestUseCase = module.get<CreateHarvestUseCase>(CreateHarvestUseCase);
+    createHarvestUseCase =
+      module.get<CreateHarvestUseCase>(CreateHarvestUseCase);
     harvestRepository = module.get<IHarvestRepository>(IHarvestRepository);
     cropRepository = module.get<ICropRepository>(ICropRepository);
 
@@ -43,24 +44,45 @@ describe('CreateHarvestUseCase', () => {
   });
 
   it('should call findById on cropRepository with correct crop ID', async () => {
-    const data: CreateHarvestDto = { cropId: '123', amount: 100, harvestDate: new Date() };
+    const data: CreateHarvestDto = {
+      cropId: '123',
+      amount: 100,
+      harvestDate: new Date(),
+    };
 
-    jest.spyOn(cropRepository, 'findById').mockResolvedValue({ id: '123', name: 'Wheat' } as Crop);
+    jest
+      .spyOn(cropRepository, 'findById')
+      .mockResolvedValue({ id: '123', name: 'Wheat' } as Crop);
     await createHarvestUseCase.execute(data);
     expect(cropRepository.findById).toHaveBeenCalledWith('123');
   });
 
   it('should throw NotFoundException if crop is not found', async () => {
-    const data: CreateHarvestDto = { cropId: '123', amount: 100, harvestDate: new Date() };
+    const data: CreateHarvestDto = {
+      cropId: '123',
+      amount: 100,
+      harvestDate: new Date(),
+    };
     jest.spyOn(cropRepository, 'findById').mockResolvedValue(null);
 
-    await expect(createHarvestUseCase.execute(data)).rejects.toThrow(NotFoundException);
+    await expect(createHarvestUseCase.execute(data)).rejects.toThrow(
+      NotFoundException,
+    );
   });
 
   it('should call create on harvestRepository with correct data', async () => {
-    const data: CreateHarvestDto = { cropId: '123', amount: 100, harvestDate: new Date() };
+    const data: CreateHarvestDto = {
+      cropId: '123',
+      amount: 100,
+      harvestDate: new Date(),
+    };
     const crop: Crop = { id: '123', name: 'Wheat' } as Crop;
-    const harvest: Harvest = { id: '456', amount: 100, harvestDate: new Date(), crop } as Harvest;
+    const harvest: Harvest = {
+      id: '456',
+      amount: 100,
+      harvestDate: new Date(),
+      crop,
+    } as Harvest;
 
     jest.spyOn(cropRepository, 'findById').mockResolvedValue(crop);
     jest.spyOn(harvestRepository, 'create').mockResolvedValue(harvest);
@@ -75,30 +97,44 @@ describe('CreateHarvestUseCase', () => {
   });
 
   it('should throw NotFoundException if crop does not exist', async () => {
-    const data: CreateHarvestDto = { cropId: '123', amount: 100, harvestDate: new Date() };
-  
+    const data: CreateHarvestDto = {
+      cropId: '123',
+      amount: 100,
+      harvestDate: new Date(),
+    };
+
     jest.spyOn(cropRepository, 'findById').mockResolvedValue(undefined);
-  
-    await expect(createHarvestUseCase.execute(data)).rejects.toThrow(NotFoundException);
+
+    await expect(createHarvestUseCase.execute(data)).rejects.toThrow(
+      NotFoundException,
+    );
   });
 
   it('should call create on harvestRepository with correct data', async () => {
-    const data: CreateHarvestDto = { cropId: '123', amount: 100, harvestDate: new Date() };
+    const data: CreateHarvestDto = {
+      cropId: '123',
+      amount: 100,
+      harvestDate: new Date(),
+    };
     const crop: Crop = { id: '123', name: 'Wheat' } as Crop;
-    const harvest: Harvest = { id: '456', amount: 100, harvestDate: new Date(), crop } as Harvest;
-  
+    const harvest: Harvest = {
+      id: '456',
+      amount: 100,
+      harvestDate: new Date(),
+      crop,
+    } as Harvest;
+
     jest.spyOn(cropRepository, 'findById').mockResolvedValue(crop);
     jest.spyOn(harvestRepository, 'create').mockResolvedValue(harvest);
-  
+
     const result = await createHarvestUseCase.execute(data);
-  
+
     expect(harvestRepository.create).toHaveBeenCalledWith({
       amount: data.amount,
       harvestDate: data.harvestDate,
       crop,
     });
-  
+
     expect(result).toEqual(harvest);
   });
-  
 });

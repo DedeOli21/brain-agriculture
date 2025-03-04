@@ -26,4 +26,34 @@ export class FarmImplementation implements IFarmRepository {
       relations: ['seasons', 'seasons.crops', 'seasons.crops.harvests'],
     });
   }
+
+  count(): Promise<number> {
+    return this.farmRepository.count();
+  }
+
+  totalArea(): Promise<number> {
+    return this.farmRepository
+      .createQueryBuilder('farm')
+      .select('SUM(farm.totalArea)', 'total')
+      .getRawOne();
+  }
+
+  countByState(): Promise<any[]> {
+    return this.farmRepository
+      .createQueryBuilder('farm')
+      .select('farm.state, COUNT(*) as count')
+      .groupBy('farm.state')
+      .getRawMany();
+  }
+
+  totalArableAndVegetationArea(): Promise<any> {
+    return this.farmRepository
+      .createQueryBuilder('farm')
+      .select([
+        `SUM(farm.arableArea) as arableArea`,
+        `SUM(farm.vegetationArea) as vegetationArea`,
+      ])
+      .groupBy('farm.id')
+      .getRawOne();
+  }
 }

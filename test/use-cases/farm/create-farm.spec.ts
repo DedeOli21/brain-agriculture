@@ -50,10 +50,12 @@ describe('CreateFarmUseCase', () => {
       vegetationArea: 50,
       name: 'farm',
       city: 'city-city',
-      state: 'sp'
+      state: 'sp',
     };
 
-    await expect(createFarmUseCase.execute(payload)).rejects.toThrow(BadRequestException);
+    await expect(createFarmUseCase.execute(payload)).rejects.toThrow(
+      BadRequestException,
+    );
   });
 
   it('should call findProducerById on producerRepository with correct producer ID', async () => {
@@ -64,10 +66,12 @@ describe('CreateFarmUseCase', () => {
       vegetationArea: 50,
       name: '',
       city: '',
-      state: ''
+      state: '',
     };
 
-    jest.spyOn(producerRepository, 'findProducerById').mockResolvedValue({ id: '123', name: 'Test Producer' });
+    jest
+      .spyOn(producerRepository, 'findProducerById')
+      .mockResolvedValue({ id: '123', name: 'Test Producer' });
 
     await createFarmUseCase.execute(payload);
     expect(producerRepository.findProducerById).toHaveBeenCalledWith('123');
@@ -81,15 +85,18 @@ describe('CreateFarmUseCase', () => {
       vegetationArea: 50,
       name: '',
       city: '',
-      state: ''
+      state: '',
     };
 
     const producer: Producer = {
-      id: '123', name: 'Test Producer',
+      id: '123',
+      name: 'Test Producer',
       document: '',
-      farms: []
+      farms: [],
     };
-    jest.spyOn(producerRepository, 'findProducerById').mockResolvedValue(producer);
+    jest
+      .spyOn(producerRepository, 'findProducerById')
+      .mockResolvedValue(producer);
 
     const farm: Farm = {
       id: '456',
@@ -100,13 +107,16 @@ describe('CreateFarmUseCase', () => {
       name: '',
       city: '',
       state: '',
-      seasons: []
+      seasons: [],
     };
 
     jest.spyOn(farmRepository, 'create').mockResolvedValue(farm);
 
     const result = await createFarmUseCase.execute(payload);
-    expect(farmRepository.create).toHaveBeenCalledWith({ ...payload, producer });
+    expect(farmRepository.create).toHaveBeenCalledWith({
+      ...payload,
+      producer,
+    });
     expect(result).toEqual(farm);
   });
 });

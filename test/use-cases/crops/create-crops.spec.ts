@@ -46,42 +46,61 @@ describe('CreateCropUseCase', () => {
   it('should call findById on seasonRepository with correct season ID', async () => {
     const data: CreateCropDto = { name: 'Wheat', seasonId: '123' };
 
-    jest.spyOn(seasonRepository, 'findById').mockResolvedValue({ id: '123', name: 'Spring', year: '', farm: new Farm, crops: [] });
+    jest.spyOn(seasonRepository, 'findById').mockResolvedValue({
+      id: '123',
+      name: 'Spring',
+      year: '',
+      farm: new Farm(),
+      crops: [],
+    });
     await createCropUseCase.execute(data);
-    expect(seasonRepository.findById).toHaveBeenCalledWith({ id: data.seasonId });
+    expect(seasonRepository.findById).toHaveBeenCalledWith({
+      id: data.seasonId,
+    });
   });
 
   it('should throw NotFoundException if season is not found', async () => {
     const data: CreateCropDto = { name: 'Wheat', seasonId: '123' };
     jest.spyOn(seasonRepository, 'findById').mockResolvedValue(null);
 
-    await expect(createCropUseCase.execute(data)).rejects.toThrow(NotFoundException);
+    await expect(createCropUseCase.execute(data)).rejects.toThrow(
+      NotFoundException,
+    );
   });
 
   it('should call create on cropRepository with correct data', async () => {
     const data: CreateCropDto = { name: 'Wheat', seasonId: '123' };
     const dataMockCrop: Crop = {
-      name: 'Wheat', season: { id: '123', name: 'Spring', year: '', farm: new Farm, crops: [] }, harvests: [],
+      name: 'Wheat',
+      season: {
+        id: '123',
+        name: 'Spring',
+        year: '',
+        farm: new Farm(),
+        crops: [],
+      },
+      harvests: [],
       id: '',
       createdAt: '',
-      updatedAt: ''
+      updatedAt: '',
     };
     const season: Season = {
-      id: '123', name: 'Spring',
+      id: '123',
+      name: 'Spring',
       year: '',
-      farm: new Farm,
-      crops: []
+      farm: new Farm(),
+      crops: [],
     };
-    
+
     jest.spyOn(seasonRepository, 'findById').mockResolvedValue(season);
-    
-    
-    const crop = { id: '456', name: 'Wheat', season };
 
     jest.spyOn(cropRepository, 'create').mockResolvedValue(dataMockCrop);
 
     const result = await createCropUseCase.execute(data);
-    expect(cropRepository.create).toHaveBeenCalledWith({ name: data.name, season });
+    expect(cropRepository.create).toHaveBeenCalledWith({
+      name: data.name,
+      season,
+    });
     expect(result).toEqual(dataMockCrop);
   });
 });

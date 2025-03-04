@@ -18,4 +18,12 @@ export class CropImplementation implements ICropRepository {
   async findById(id: string): Promise<Crop> {
     return this.repository.findOneBy({ id });
   }
+
+  async countByCrop(): Promise<any> {
+    return this.repository
+      .createQueryBuilder('crop')
+      .select('crop.name, COUNT(*) as count')
+      .groupBy('crop.name')
+      .getRawMany();
+  }
 }

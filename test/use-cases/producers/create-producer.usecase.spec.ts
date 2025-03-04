@@ -31,36 +31,51 @@ describe('CreateProducerUseCase', () => {
     }).compile();
 
     useCase = module.get<CreateProducerUseCase>(CreateProducerUseCase);
-    producerRepository = module.get<IProducerRepository>(IProducerRepository) as jest.Mocked<IProducerRepository>;
+    producerRepository = module.get<IProducerRepository>(
+      IProducerRepository,
+    ) as jest.Mocked<IProducerRepository>;
     jest.clearAllMocks();
   });
 
   it('should throw an error if document is not provided', async () => {
     const payload: CreateProducerRequestDto = { document: '', name: 'name' };
 
-    await expect(useCase.execute(payload)).rejects.toThrow('Document is required');
+    await expect(useCase.execute(payload)).rejects.toThrow(
+      'Document is required',
+    );
   });
 
   it('should throw a BadRequestException if document is not valid', async () => {
-    const payload: CreateProducerRequestDto = { document: 'invalid-document', name: 'name' };
-    
+    const payload: CreateProducerRequestDto = {
+      document: 'invalid-document',
+      name: 'name',
+    };
+
     jest.spyOn(documentValidator, 'isValidDocument').mockReturnValue(false);
-    
+
     await expect(useCase.execute(payload)).rejects.toThrow(BadRequestException);
   });
 
   it('should throw an error if producer already exists', async () => {
-    const payload: CreateProducerRequestDto = { document: 'valid-document', name: 'valid-name' };
+    const payload: CreateProducerRequestDto = {
+      document: 'valid-document',
+      name: 'valid-name',
+    };
 
     jest.spyOn(documentValidator, 'isValidDocument').mockReturnValue(true);
-    
+
     producerRepository.findProducerByDocument.mockResolvedValue({});
 
-    await expect(useCase.execute(payload)).rejects.toThrow('Producer already exists');
+    await expect(useCase.execute(payload)).rejects.toThrow(
+      'Producer already exists',
+    );
   });
 
   it('should create a producer if document is valid and producer does not exist', async () => {
-    const payload: CreateProducerRequestDto = { document: 'valid-document', name: 'valid-name' };
+    const payload: CreateProducerRequestDto = {
+      document: 'valid-document',
+      name: 'valid-name',
+    };
 
     jest.spyOn(documentValidator, 'isValidDocument').mockReturnValue(true);
     producerRepository.findProducerByDocument.mockResolvedValue(null);

@@ -5,9 +5,7 @@ import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
 
 @Injectable()
 export class FindAllFarmUseCase {
-  constructor(
-    private readonly farmRepository: IFarmRepository
-  ) {}
+  constructor(private readonly farmRepository: IFarmRepository) {}
 
   async execute(
     findAllFarmQueryRequestDto: FindAllFarmQueryRequestDto,
