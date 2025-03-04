@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { CreateHarvestUseCase } from './create-harvest.usecase';
-import { DatabaseModule } from 'src/infra/database/database.module';
+import { DatabaseModule } from '@infra/database/database.module';
 
 @Module({
   imports: [DatabaseModule],

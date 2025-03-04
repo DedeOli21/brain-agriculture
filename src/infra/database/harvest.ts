@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IHarvestRepository } from 'src/domain/interfaces/harvest.repository.interface';
-import { Harvest } from 'src/domain/entities/harvest/harvest.entity';
+import { IHarvestRepository } from '@domain/interfaces/harvest.repository.interface';
+import { Harvest } from '@domain/entities/harvest/harvest.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()

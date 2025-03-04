@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { ISeasonRepository } from '@domain/interfaces/season.repository.interface';
 import { Season } from '@domain/entities/season/season.entity';
 import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
-import { CreateSeasonDto } from './dto/create-season.dto';
+import { CreateSeasonDto } from '@app/use-cases/season/dto/create-season.dto';
 
 @Injectable()
 export class CreateSeasonUseCase {

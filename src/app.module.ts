@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { Crop } from './domain/entities/crops/crop.entity';
-import { Farm } from './domain/entities/farms/farm.entity';
-import { Producer } from './domain/entities/producers/producer.entity';
-import { Harvest } from './domain/entities/harvest/harvest.entity';
-import { Season } from './domain/entities/season/season.entity';
-import { ApplicationModule } from './application/application.module';
-import { PresentationModule } from './presentation/presentation.module';
+import { Crop } from '@domain/entities/crops/crop.entity';
+import { Farm } from '@domain/entities/farms/farm.entity';
+import { Producer } from '@domain/entities/producers/producer.entity';
+import { Harvest } from '@domain/entities/harvest/harvest.entity';
+import { Season } from '@domain/entities/season/season.entity';
+import { PresentationModule } from '@presentation/presentation.module';
+import { ApplicationModule } from '@app/application.module';
 
 @Module({
   imports: [

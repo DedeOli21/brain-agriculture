@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { Producer } from '../../../domain/entities/producers/producer.entity';
-import { CreateProducerUseCase } from '../../../application/use-cases/producers/create-producer.usecase';
-import { CreateProducerRequestDto } from '../../../application/use-cases/producers/dto/request/create-request.dto';
-import { FindAllProducerUseCase } from 'src/application/use-cases/producers/find-all.usecase';
-import { FindByIdUseCase } from 'src/application/use-cases/producers/find-by-id.usecase';
-import { FindByDocumentUseCase } from 'src/application/use-cases/producers/find-by-document.usecase';
+import { Producer } from '@domain/entities/producers/producer.entity';
+import { CreateProducerUseCase } from '@app/use-cases/producers/create-producer.usecase';
+import { CreateProducerRequestDto } from '@app/use-cases/producers/dto/request/create-request.dto';
+import { FindAllProducerUseCase } from '@app/use-cases/producers/find-all.usecase';
+import { FindByIdUseCase } from '@app/use-cases/producers/find-by-id.usecase';
+import { FindByDocumentUseCase } from '@app/use-cases/producers/find-by-document.usecase';
 
 @Controller('producers')
 export class ProducersController {

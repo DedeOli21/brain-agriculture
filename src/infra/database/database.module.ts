@@ -1,20 +1,20 @@
 import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { IProducerRepository } from 'src/domain/interfaces/producers.repository.interface';
-import { IHarvestRepository } from 'src/domain/interfaces/harvest.repository.interface';
-import { ICropRepository } from 'src/domain/interfaces/crop.repository.interface';
-import { ISeasonRepository } from 'src/domain/interfaces/season.repository.interface';
+import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
+import { IHarvestRepository } from '@domain/interfaces/harvest.repository.interface';
+import { ICropRepository } from '@domain/interfaces/crop.repository.interface';
+import { ISeasonRepository } from '@domain/interfaces/season.repository.interface';
+import { Farm } from '@domain/entities/farms/farm.entity';
+import { Producer } from '@domain/entities/producers/producer.entity';
+import { Harvest } from '@domain/entities/harvest/harvest.entity';
+import { Season } from '@domain/entities/season/season.entity';
+import { Crop } from '@domain/entities/crops/crop.entity';
+import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
 import { ProducerImplementation } from './producer';
 import { FarmImplementation } from './farm';
 import { HarvestImplementation } from './harvest';
 import { CropImplementation } from './crop';
 import { SeasonImplementation } from './season';
-import { Farm } from 'src/domain/entities/farms/farm.entity';
-import { Producer } from 'src/domain/entities/producers/producer.entity';
-import { Harvest } from 'src/domain/entities/harvest/harvest.entity';
-import { Season } from 'src/domain/entities/season/season.entity';
-import { Crop } from 'src/domain/entities/crops/crop.entity';
-import { IFarmRepository } from 'src/domain/interfaces/farms.repository.interface';
 
 @Global()
 @Module({

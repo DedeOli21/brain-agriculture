@@ -1,10 +1,10 @@
-import request from 'supertest';
+import * as request from 'supertest';
 import { INestApplication } from '@nestjs/common';
-import { AppModule } from 'src/app.module';
 import { Test, TestingModule } from '@nestjs/testing';
 import { DataSource } from 'typeorm';
-import { setupDataSource } from '../setup';
 import { CreateProducerRequestDto } from '@app/use-cases/producers/dto/request/create-request.dto';
+import { setupDataSource } from '../setup';
+import { AppModule } from '../../../src/app.module';
 
 describe('E2E Test for All Routes', () => {
   let app: INestApplication;

@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateCropDto } from './dtos/create-crop.dto';
-import { Crop } from '../../../domain/entities/crops/crop.entity';
-import { ISeasonRepository } from '../../../domain/interfaces/season.repository.interface';
-import { ICropRepository } from '../../../domain/interfaces/crop.repository.interface';
+import { CreateCropDto } from '@app/use-cases/crops/dtos/create-crop.dto';
+import { Crop } from '@domain/entities/crops/crop.entity';
+import { ISeasonRepository } from '@domain/interfaces/season.repository.interface';
+import { ICropRepository } from '@domain/interfaces/crop.repository.interface';
 
 @Injectable()
 export class CreateCropUseCase {

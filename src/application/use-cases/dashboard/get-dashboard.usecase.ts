@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DashboardResponseDto } from './dto/dashboard-response.dto';
+import { DashboardResponseDto } from '@app/use-cases/dashboard/dto/dashboard-response.dto';
 import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
 import { ICropRepository } from '@domain/interfaces/crop.repository.interface';
 

@@ -1,3 +1,3 @@
-import { Producer } from '../../../../../domain/entities/producers/producer.entity';
+import { Producer } from '@domain/entities/producers/producer.entity';
 
 export class FindOneProducerResponseDto extends Producer {}

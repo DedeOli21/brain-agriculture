@@ -1,7 +1,7 @@
-import { Producer } from '@domain/entities/producers/producer.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+
 
 let config: TypeOrmModuleOptions & PostgresConnectionOptions = {
   type: 'postgres',
@@ -10,10 +10,10 @@ let config: TypeOrmModuleOptions & PostgresConnectionOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  entities: ['dist/domain/entities/**/*.entity{.ts,.js}'],
+  entities: ['src/domain/entities/**/*.ts'],
   synchronize: false,
   migrationsRun: false,
-  migrations: ['dist/migrations/*.js'],
+  migrations: ['src/migrations/**/*.ts'],
 };
 
 config = {

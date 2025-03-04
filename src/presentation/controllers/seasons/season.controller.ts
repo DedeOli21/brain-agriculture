@@ -1,6 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { CreateSeasonUseCase } from 'src/application/use-cases/season/create-season.usecase';
-import { CreateSeasonDto } from 'src/application/use-cases/season/dto/create-season.dto';
+import { CreateSeasonUseCase } from '@app/use-cases/season/create-season.usecase';
+import { CreateSeasonDto } from '@app/use-cases/season/dto/create-season.dto';
 import { Season } from 'src/domain/entities/season/season.entity';
 
 @Controller('seasons')
