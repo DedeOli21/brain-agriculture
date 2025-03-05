@@ -121,7 +121,7 @@ describe('GetDashboardUseCase', () => {
     ];
     const landUsage = { arableArea: 600, vegetationArea: 400 };
 
-    jest.spyOn(farmRepository, 'totalArea').mockResolvedValue({ total: null });
+    jest.spyOn(farmRepository, 'totalArea').mockResolvedValue(totalHectares);
 
     const result: DashboardResponseDto = await getDashboardUseCase.execute();
 

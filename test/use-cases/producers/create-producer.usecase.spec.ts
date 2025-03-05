@@ -11,15 +11,14 @@ const mockDto = (props: Partial<CreateProducerRequestDto>) => {
     name: 'valid-name',
     ...props,
   };
-}
+};
 
-export const ManyToOne = jest.fn(callback => callback());
+export const ManyToOne = jest.fn((callback) => callback());
 
 // Mock da função `isValidDocumentToProducer`
 jest.mock('@shared/helpers/is-valid-document', () => ({
   isValidDocument: jest.fn(),
-}));  
-
+}));
 
 describe('CreateProducerUseCase', () => {
   let useCase: CreateProducerUseCase;

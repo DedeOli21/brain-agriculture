@@ -5,7 +5,6 @@ import { AppModule } from '../../../src/app.module';
 import { setupDataSource } from '../setup';
 import { DataSource } from 'typeorm';
 import { CreateHarvestDto } from '@app/use-cases/harvest/dto/create-harvest.dto';
-import { V4MAPPED } from 'dns';
 import { randomUUID } from 'crypto';
 
 describe('Harvests E2E', () => {
@@ -35,7 +34,7 @@ describe('Harvests E2E', () => {
       amount: 100,
       harvestDate: new Date(),
     };
-    
+
     const response = await request(app.getHttpServer())
       .post('/harvest')
       .send(createHarvestDto)

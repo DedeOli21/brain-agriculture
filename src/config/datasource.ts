@@ -2,7 +2,6 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
-
 let config: TypeOrmModuleOptions & PostgresConnectionOptions = {
   type: 'postgres',
   host: process.env.DB_HOST,
