@@ -11,6 +11,24 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-
+  
+  app:
+    build: .
+    container_name: brain-agriculture
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://admin:password@postgres:5432/brain_agriculture
+      NODE_ENV: production
+      TYPEORM_SYNCHRONIZE: true
+      TYPEORM_LOGGING: true
+      TYPEORM_AUTO_LOAD_ENTITIES: true
+      TYPEORM_ENTITIES: dist/**/*.entity.js
+      TYPEORM_MIGRATIONS: dist/**/migrations/*.js
+    command: ["node", "dist/src/main.js"]
 volumes:
   pgdata:
