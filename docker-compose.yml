@@ -2,6 +2,7 @@ version: '3.8'
 services:
   db:
     image: postgres:15
+    container_name: brain-agriculture-db
     restart: always
     environment:
       POSTGRES_USER: admin
@@ -11,24 +12,30 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-  
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   app:
     build: .
     container_name: brain-agriculture
     restart: always
     depends_on:
-      postgres:
+      db:
         condition: service_healthy
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgresql://admin:password@postgres:5432/brain_agriculture
+      DATABASE_URL: postgresql://admin:password@db:5432/brain_agriculture
       NODE_ENV: production
       TYPEORM_SYNCHRONIZE: true
       TYPEORM_LOGGING: true
       TYPEORM_AUTO_LOAD_ENTITIES: true
       TYPEORM_ENTITIES: dist/**/*.entity.js
       TYPEORM_MIGRATIONS: dist/**/migrations/*.js
-    command: ["node", "dist/src/main.js"]
+    command: ["node", "dist/main.js"]
+
 volumes:
   pgdata:
