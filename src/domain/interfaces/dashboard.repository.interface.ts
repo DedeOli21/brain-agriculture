@@ -1,3 +1,3 @@
 export class IDashboardRepository {
-    getDashboard: () => Promise<any>;
+  getDashboard: () => Promise<any>;
 }

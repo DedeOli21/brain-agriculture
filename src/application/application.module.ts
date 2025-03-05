@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-
-import { FarmsModule } from './use-cases/farms/farms.module';
-import { HarvestModule } from './use-cases/harvest/harvest.module';
-import { SeasonModule } from './use-cases/season/season.module';
-import { CropsModule } from './use-cases/crops/crops.module';
-import { DashboardModule } from './use-cases/dashboard/dashboard.module';
-import { ProducersModule } from './use-cases/producers/producers.module';
+import { FarmsModule } from '@app/use-cases/farms/farms.module';
+import { HarvestModule } from '@app/use-cases/harvest/harvest.module';
+import { SeasonModule } from '@app/use-cases/season/season.module';
+import { CropsModule } from '@app/use-cases/crops/crops.module';
+import { DashboardModule } from '@app/use-cases/dashboard/dashboard.module';
+import { ProducersModule } from '@app/use-cases/producers/producers.module';
 
 const usecases = [
   ProducersModule,

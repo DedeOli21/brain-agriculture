@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Farm } from 'src/domain/entities/farms/farm.entity';
-import { IProducerRepository } from 'src/domain/interfaces/producers.repository.interface';
-import { IFarmRepository } from '../../../domain/interfaces/farms.repository.interface';
+import { Farm } from '@domain/entities/farms/farm.entity';
+import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
+import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
 import { CreateFarmRequestDto } from './dto/request/create-request.dto';
 
 @Injectable()
@@ -33,7 +33,6 @@ export class CreateFarmUseCase {
     arableArea: number,
     vegetationArea: number,
   ): boolean {
-    console.log([totalArea, arableArea, vegetationArea]);
     return totalArea >= arableArea + vegetationArea;
   }
 }

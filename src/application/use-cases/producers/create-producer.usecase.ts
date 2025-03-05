@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { IProducerRepository } from 'src/domain/interfaces/producers.repository.interface';
-import { CreateProducerRequestDto } from 'src/application/use-cases/producers/dto/request/create-request.dto';
-import { isValidDocumentToProducer } from 'src/shared/helpers/is-valid-document-to-producer';
+import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
+import { CreateProducerRequestDto } from '@app/use-cases/producers/dto/request/create-request.dto';
+import { isValidDocument } from '@shared/helpers/is-valid-document';
 
 @Injectable()
 export class CreateProducerUseCase {
@@ -14,9 +14,9 @@ export class CreateProducerUseCase {
       throw new Error('Document is required');
     }
 
-    const isValidDocument = isValidDocumentToProducer(document);
+    const isValiDoc = isValidDocument(document);
 
-    if (!isValidDocument) {
+    if (!isValiDoc) {
       throw new BadRequestException(`Document ${document} is not valid`);
     }
 

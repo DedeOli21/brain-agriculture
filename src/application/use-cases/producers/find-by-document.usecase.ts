@@ -1,15 +1,15 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { IProducerRepository } from 'src/domain/interfaces/producers.repository.interface';
-import { isValidDocumentToProducer } from 'src/shared/helpers/is-valid-document-to-producer';
+import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
+import { isValidDocument } from '@shared/helpers/is-valid-document';
 
 @Injectable()
 export class FindByDocumentUseCase {
   constructor(private readonly producerRepository: IProducerRepository) {}
 
   async execute(document: string) {
-    const isValidDocument = isValidDocumentToProducer(document);
+    const isValidDoc = isValidDocument(document);
 
-    if (!isValidDocument) {
+    if (!isValidDoc) {
       throw new BadRequestException(`Document ${document} is not valid`);
     }
 

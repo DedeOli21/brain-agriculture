@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IProducerRepository } from 'src/domain/interfaces/producers.repository.interface';
+import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
 
 @Injectable()
 export class FindByIdUseCase {

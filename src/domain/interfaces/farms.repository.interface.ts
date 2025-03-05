@@ -10,4 +10,8 @@ export abstract class IFarmRepository {
   ) => Promise<FindAllFarmResponseDto>;
   findFarmById: (id: string) => Promise<Farm>;
   findFarmByName: (name: string) => Promise<Farm>;
+  count: () => Promise<number>;
+  totalArea: () => Promise<any>;
+  countByState: () => Promise<any>;
+  totalArableAndVegetationArea: () => Promise<any>;
 }

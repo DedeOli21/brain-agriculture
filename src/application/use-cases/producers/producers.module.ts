@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ProducersController } from '../../../presentation/controllers/producers/producers.controller';
-import { DatabaseModule } from 'src/infra/database/database.module';
+import { ProducersController } from '@presentation/controllers/producers/producers.controller';
+import { DatabaseModule } from '@infra/database/database.module';
 import { CreateProducerUseCase } from './create-producer.usecase';
 import { FindAllProducerUseCase } from './find-all.usecase';
 import { FindByDocumentUseCase } from './find-by-document.usecase';

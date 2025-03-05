@@ -1,9 +1,11 @@
+import { Injectable } from '@nestjs/common';
 import { FindAllFarmQueryRequestDto } from './dto/request/findAll-request.dto';
 import { FindAllFarmResponseDto } from './dto/response/findAll-response.dto';
-import { IFarmRepository } from 'src/domain/interfaces/farms.repository.interface';
+import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
 
+@Injectable()
 export class FindAllFarmUseCase {
-  constructor(private farmRepository: IFarmRepository) {}
+  constructor(private readonly farmRepository: IFarmRepository) {}
 
   async execute(
     findAllFarmQueryRequestDto: FindAllFarmQueryRequestDto,

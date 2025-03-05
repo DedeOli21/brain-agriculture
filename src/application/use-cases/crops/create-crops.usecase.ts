@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateCropDto } from './dtos/create-crop.dto';
-import { Crop } from '../../../domain/entities/crops/crop.entity';
-import { ISeasonRepository } from '../../../domain/interfaces/season.repository.interface';
-import { ICropRepository } from '../../../domain/interfaces/crop.repository.interface';
+import { CreateCropDto } from '@app/use-cases/crops/dtos/create-crop.dto';
+import { Crop } from '@domain/entities/crops/crop.entity';
+import { ISeasonRepository } from '@domain/interfaces/season.repository.interface';
+import { ICropRepository } from '@domain/interfaces/crop.repository.interface';
 
 @Injectable()
 export class CreateCropUseCase {
@@ -14,7 +14,6 @@ export class CreateCropUseCase {
   async execute(data: CreateCropDto): Promise<Crop> {
     // Validar se a safra existe
 
-    console.log('data', data);
     const season = await this.seasonRepository.findById({ id: data.seasonId });
     if (!season) {
       throw new NotFoundException('Safra não encontrada');
