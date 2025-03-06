@@ -5,6 +5,8 @@ import { CreateProducerUseCase } from './create-producer.usecase';
 import { FindAllProducerUseCase } from './find-all.usecase';
 import { FindByDocumentUseCase } from './find-by-document.usecase';
 import { FindByIdUseCase } from './find-by-id.usecase';
+import { UpdateProducerUseCase } from './update-producer.usecase';
+import { DeleteProducerUseCase } from './delete-producer.usecase';
 
 @Module({
   imports: [DatabaseModule],
@@ -13,12 +15,16 @@ import { FindByIdUseCase } from './find-by-id.usecase';
     FindAllProducerUseCase,
     FindByDocumentUseCase,
     FindByIdUseCase,
+    UpdateProducerUseCase,
+    DeleteProducerUseCase
   ],
   exports: [
     CreateProducerUseCase,
     FindAllProducerUseCase,
     FindByDocumentUseCase,
     FindByIdUseCase,
+    UpdateProducerUseCase,
+    DeleteProducerUseCase
   ],
   controllers: [ProducersController],
 })
