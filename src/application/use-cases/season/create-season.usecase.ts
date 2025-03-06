@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ISeasonRepository } from '@domain/interfaces/season.repository.interface';
-import { Season } from '@domain/entities/season/season.entity';
 import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
 import { CreateSeasonDto } from '@app/use-cases/season/dto/create-season.dto';
+import { CreateSeasonResponseDto } from './dto/create-response.dto';
 
 @Injectable()
 export class CreateSeasonUseCase {
@@ -11,7 +11,7 @@ export class CreateSeasonUseCase {
     private readonly farmRepository: IFarmRepository,
   ) {}
 
-  async execute(data: CreateSeasonDto): Promise<Season> {
+  async execute(data: CreateSeasonDto): Promise<CreateSeasonResponseDto> {
     const farm = await this.farmRepository.findFarmById(data.farmId);
     if (!farm) {
       throw new NotFoundException('Fazenda não encontrada');

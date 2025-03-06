@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { FindByIdUseCase } from '@app/use-cases/producers/find-by-id.usecase';
 import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
+import { FindOneProducerResponseDto } from '@app/use-cases/producers/dto/response/findOne-reponse.dto';
 
 describe('FindByIdUseCase', () => {
   let findByIdUseCase: FindByIdUseCase;
@@ -38,7 +39,7 @@ describe('FindByIdUseCase', () => {
     const producer = { id, name: 'Test Producer' };
     jest
       .spyOn(producerRepository, 'findProducerById')
-      .mockResolvedValue(producer);
+      .mockResolvedValue(producer as FindOneProducerResponseDto);
 
     const result = await findByIdUseCase.execute(id);
     expect(result).toEqual(producer);

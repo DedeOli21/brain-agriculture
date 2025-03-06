@@ -6,6 +6,7 @@ import { IProducerRepository } from '@domain/interfaces/producers.repository.int
 import { Farm } from '@domain/entities/farms/farm.entity';
 import { CreateFarmRequestDto } from '@app/use-cases/farms/dto/request/create-request.dto';
 import { Producer } from '@domain/entities/producers/producer.entity';
+import { FindFarmResponseDto } from '@app/use-cases/farms/dto/response/findById-response.dto';
 
 describe('CreateFarmUseCase', () => {
   let createFarmUseCase: CreateFarmUseCase;
@@ -71,7 +72,7 @@ describe('CreateFarmUseCase', () => {
 
     jest
       .spyOn(producerRepository, 'findProducerById')
-      .mockResolvedValue({ id: '123', name: 'Test Producer' });
+      .mockResolvedValue({ id: '123', name: 'Test Producer' } as any);
 
     await createFarmUseCase.execute(payload);
     expect(producerRepository.findProducerById).toHaveBeenCalledWith('123');
@@ -115,7 +116,7 @@ describe('CreateFarmUseCase', () => {
     const result = await createFarmUseCase.execute(payload);
     expect(farmRepository.create).toHaveBeenCalledWith({
       ...payload,
-      producer,
+      producerId: producer.id,
     });
     expect(result).toEqual(farm);
   });

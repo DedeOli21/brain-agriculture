@@ -35,4 +35,4 @@ EXPOSE 3000
 # Executa o container com um usuário seguro
 USER appuser
 
-CMD ["node", "./dist/main.js"]
+CMD ["node", "./dist/src/main.js"]

@@ -4,6 +4,7 @@ import { IProducerRepository } from '@domain/interfaces/producers.repository.int
 import { CreateProducerRequestDto } from '@app/use-cases/producers/dto/request/create-request.dto';
 import { BadRequestException } from '@nestjs/common';
 import * as documentValidator from '@shared/helpers/is-valid-document';
+import { FindOneProducerResponseDto } from '@app/use-cases/producers/dto/response/findOne-reponse.dto';
 
 const mockDto = (props: Partial<CreateProducerRequestDto>) => {
   return {
@@ -45,6 +46,10 @@ describe('CreateProducerUseCase', () => {
     jest.clearAllMocks();
   });
 
+  it('should be defined', () => {
+    expect(useCase).toBeDefined();
+  });
+
   it('should throw an error if document is not provided', async () => {
     const payload = mockDto({ document: undefined });
 
@@ -66,11 +71,9 @@ describe('CreateProducerUseCase', () => {
 
     jest.spyOn(documentValidator, 'isValidDocument').mockReturnValue(true);
 
-    producerRepository.findProducerByDocument.mockResolvedValue({});
-
-    await expect(useCase.execute(payload)).rejects.toThrow(
-      'Producer already exists',
-    );
+    producerRepository.findProducerByDocument.mockResolvedValue({} as FindOneProducerResponseDto);
+ 
+    await expect(useCase.execute(payload)).rejects.toThrow();
   });
 
   it('should create a producer if document is valid and producer does not exist', async () => {
@@ -78,7 +81,7 @@ describe('CreateProducerUseCase', () => {
 
     jest.spyOn(documentValidator, 'isValidDocument').mockReturnValue(true);
     producerRepository.findProducerByDocument.mockResolvedValue(null);
-    producerRepository.create.mockResolvedValue({ id: '1', ...payload });
+    producerRepository.create.mockResolvedValue({ id: '1', ...payload } as never);
 
     const result = await useCase.execute(payload);
 

@@ -11,15 +11,19 @@ export class GetDashboardUseCase {
   ) {}
 
   async execute(): Promise<DashboardResponseDto> {
-    const totalFarms = await this.farmRepository.count();
-
-    const totalHectares = await this.farmRepository.totalArea();
-
-    const farmsByState = await this.farmRepository.countByState();
-
-    const cropsDistribution = await this.cropRepository.countByCrop();
-
-    const landUsage = await this.farmRepository.totalArableAndVegetationArea();
+    const [
+      totalFarms,
+      totalHectares,
+      farmsByState,
+      cropsDistribution,
+      landUsage,
+    ] = await Promise.all([
+      this.farmRepository.count(),
+      this.farmRepository.totalArea(),
+      this.farmRepository.countByState(),
+      this.cropRepository.countByCrop(),
+      this.farmRepository.totalArableAndVegetationArea(),
+    ]);
 
     return {
       totalFarms,

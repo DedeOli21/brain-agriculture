@@ -2,6 +2,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
 import { Farm } from '@domain/entities/farms/farm.entity';
 import { Repository } from 'typeorm';
+import { CreateFarmRequestDto } from '@app/use-cases/farms/dto/request/create-request.dto';
+import { CreateFarmResponseDto } from '@app/use-cases/farms/dto/response/create-response.dto';
+import { TotalAreaDto } from '@app/use-cases/farms/dto/response/totalArea-response.dto';
+import { CountByStateResponseDto } from '@app/use-cases/farms/dto/response/countByState-response.dto';
+import { TotalArableAndVegetationAreaDto } from '@app/use-cases/farms/dto/response/totalArable-response.dto';
 
 export class FarmImplementation implements IFarmRepository {
   constructor(
@@ -9,7 +14,7 @@ export class FarmImplementation implements IFarmRepository {
     private readonly farmRepository: Repository<Farm>,
   ) {}
 
-  create(payload: any): any {
+  create(payload: CreateFarmRequestDto): Promise<CreateFarmResponseDto> {
     return this.farmRepository.save(payload);
   }
 
@@ -31,14 +36,14 @@ export class FarmImplementation implements IFarmRepository {
     return this.farmRepository.count();
   }
 
-  totalArea(): Promise<number> {
+  totalArea(): Promise<TotalAreaDto> {
     return this.farmRepository
       .createQueryBuilder('farm')
       .select('SUM(farm.totalArea)', 'total')
       .getRawOne();
   }
 
-  countByState(): Promise<any[]> {
+  countByState(): Promise<CountByStateResponseDto[]> {
     return this.farmRepository
       .createQueryBuilder('farm')
       .select('farm.state, COUNT(*) as count')
@@ -46,7 +51,7 @@ export class FarmImplementation implements IFarmRepository {
       .getRawMany();
   }
 
-  totalArableAndVegetationArea(): Promise<any> {
+  totalArableAndVegetationArea(): Promise<TotalArableAndVegetationAreaDto> {
     return this.farmRepository
       .createQueryBuilder('farm')
       .select([

@@ -9,11 +9,10 @@ async function bootstrap() {
   app.useLogger(app.get(Logger));
 
   setupSwagger(app);
-  
+
   await app.listen(3000);
 }
 bootstrap();
 function setupSwagger(app: INestApplication<any>) {
   throw new Error('Function not implemented.');
 }
-

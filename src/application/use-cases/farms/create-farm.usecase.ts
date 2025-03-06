@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Farm } from '@domain/entities/farms/farm.entity';
 import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
 import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
 import { CreateFarmRequestDto } from './dto/request/create-request.dto';
+import { CreateFarmResponseDto } from './dto/response/create-response.dto';
 
 @Injectable()
 export class CreateFarmUseCase {
@@ -11,7 +11,7 @@ export class CreateFarmUseCase {
     private readonly producerRepository: IProducerRepository,
   ) {}
 
-  async execute(payload: CreateFarmRequestDto): Promise<Farm> {
+  async execute(payload: CreateFarmRequestDto): Promise<CreateFarmResponseDto> {
     const { producerId, totalArea, arableArea, vegetationArea } = payload;
 
     if (!this.isValidArea(totalArea, arableArea, vegetationArea)) {
@@ -24,7 +24,7 @@ export class CreateFarmUseCase {
 
     return await this.farmRepository.create({
       ...payload,
-      producer,
+      producerId: producer.id,
     });
   }
 
