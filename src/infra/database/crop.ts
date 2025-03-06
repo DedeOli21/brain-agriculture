@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { CountByCropDto } from '@app/use-cases/crops/dtos/CountByCrop-response.dto';
 import { FindCropByIdResponseDto } from '@app/use-cases/crops/dtos/FindCropById-response.dto';
 import { CreateCropResponseDto } from '@app/use-cases/crops/dtos/create-crop-response.dto';
+import { GetAllCropsResponseDto } from '@app/use-cases/crops/dtos/getAll-crop-response.dto';
 
 @Injectable()
 export class CropImplementation implements ICropRepository {
@@ -28,5 +29,9 @@ export class CropImplementation implements ICropRepository {
       .select('crop.name, COUNT(*) as count')
       .groupBy('crop.name')
       .getRawMany();
+  }
+
+  async getAllCrops(): Promise<GetAllCropsResponseDto[]> {
+    return this.repository.find();
   }
 }

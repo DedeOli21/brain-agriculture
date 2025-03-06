@@ -8,23 +8,32 @@ import { Harvest } from '@domain/entities/harvest/harvest.entity';
 import { Season } from '@domain/entities/season/season.entity';
 import { PresentationModule } from '@presentation/presentation.module';
 import { ApplicationModule } from '@app/application.module';
+import { DataBaseConnectionService } from '@shared/databases/database.config';
+import { DatabaseModule } from '@infra/database/database.module';
+import { LoggerModule } from 'nestjs-pino';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'admin',
-      password: 'password',
-      database: 'brain_agriculture',
-      entities: [Producer, Farm, Season, Crop, Harvest],
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
+    TypeOrmModule.forFeature([Producer, Farm, Season, Crop, Harvest]),
     ApplicationModule,
     PresentationModule,
+    DatabaseModule,
+    TypeOrmModule.forRootAsync({
+      useClass: DataBaseConnectionService,
+    }),
+    LoggerModule.forRoot({
+      pinoHttp: {
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            colorize: true,
+            translateTime: 'HH:MM:ss.l',
+            ignore: 'pid,hostname',
+          },
+        },
+      },
+    }),
   ],
   controllers: [],
   providers: [],
