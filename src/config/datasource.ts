@@ -17,8 +17,8 @@ export const AppDataSource = new DataSource({
   password: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_PASSWORD || 'password',
   database: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_DATABASE || 'brain_agriculture',
   entities: isProduction
-    ? ['dist/src/domain/entities/*.entity.js'] // Agora apontando corretamente para dist/src
-    : ['src/domain/entities/*.entity.ts'], // Caminho correto no desenvolvimento
+    ? ['dist/src/domain/entities/**/*.entity.js'] // Agora apontando corretamente para dist/src
+    : ['src/domain/entities/**/*.entity.ts'], // Caminho correto no desenvolvimento
   migrations: isProduction
     ? ['dist/src/migrations/*.js']
     : ['src/migrations/*.ts'],
