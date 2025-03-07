@@ -9,6 +9,7 @@ import { UpdateProducerResponseDto } from '@app/use-cases/producers/dto/response
 import { FindOneProducerResponseDto } from '@app/use-cases/producers/dto/response/findOne-reponse.dto';
 import { FindAllProducerResponseDto } from '@app/use-cases/producers/dto/response/findAll-reponse.dto';
 import { FindAllProducerQueryRequestDto } from '@app/use-cases/producers/dto/request/findAll-request.dto';
+import { NotFoundException } from '@nestjs/common';
 
 export class ProducerImplementation implements IProducerRepository {
   constructor(
@@ -16,60 +17,86 @@ export class ProducerImplementation implements IProducerRepository {
     private readonly producerRepository: Repository<Producer>,
   ) {}
 
-  create(
+  async create(
     payload: CreateProducerRequestDto,
   ): Promise<CreateProducerResponseDto> {
-    return this.producerRepository.save(payload);
+    const producer = this.producerRepository.create(payload);
+    return this.producerRepository.save(producer);
   }
 
-  findProducerByDocument(
+  async findProducerByDocument(
     document: string,
   ): Promise<FindOneProducerResponseDto> {
-    return this.producerRepository.findOne({
-      where: { document },
-      relations: ['farms'],
-    });
+    const producer = await this.producerRepository
+      .createQueryBuilder('producer')
+      .leftJoinAndSelect('producer.farms', 'farms')
+      .where('producer.document = :document', { document })
+      .getOne();
+
+    if (!producer) {
+      throw new NotFoundException(`Producer with document ${document} not found`);
+    }
+
+    return producer;
   }
 
   async findProducerById(id: string): Promise<FindOneProducerResponseDto> {
     const producer = await this.producerRepository
       .createQueryBuilder('producer')
-      .leftJoinAndSelect('producer.farms', 'farms') // Verifique se isso está correto
-      .where('producer.document = :document', { document })
+      .leftJoinAndSelect('producer.farms', 'farms')
+      .where('producer.id = :id', { id })
       .getOne();
-      
+
+    if (!producer) {
+      throw new NotFoundException(`Producer with ID ${id} not found`);
+    }
+
     return producer;
   }
 
   async findAll(
-    input?: FindAllProducerQueryRequestDto,
+    input: FindAllProducerQueryRequestDto = { take: 10, skip: 0 },
   ): Promise<FindAllProducerResponseDto> {
-    const result = await this.producerRepository.find({
-      relations: [
-        'farms',
-        'farms.seasons',
-        'farms.seasons.crops',
-        'farms.seasons.crops.harvests',
-      ],
-      take: input.take,
-      skip: input.skip,
-    });
+    const { take, skip } = input;
+
+    const [producers, total] = await this.producerRepository
+      .createQueryBuilder('producer')
+      .leftJoinAndSelect('producer.farms', 'farms')
+      .leftJoinAndSelect('farms.seasons', 'seasons')
+      .leftJoinAndSelect('seasons.crops', 'crops')
+      .leftJoinAndSelect('crops.harvests', 'harvests')
+      .take(take)
+      .skip(skip)
+      .getManyAndCount();
 
     return {
-      producers: result,
-      total: result.length,
+      producers,
+      total,
     };
   }
 
-  delete(id: string): void {
-    this.producerRepository.delete(id);
+  async delete(id: string): Promise<void> {
+    const result = await this.producerRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Producer with ID ${id} not found`);
+    }
   }
 
   async update(
     payload: UpdateProducerRequestDto,
   ): Promise<UpdateProducerResponseDto> {
     const { id } = payload;
-    await this.producerRepository.update(id, payload);
-    return this.producerRepository.findOne({ where: { id } });
+    const result = await this.producerRepository.update(id, payload);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Producer with ID ${id} not found`);
+    }
+
+    const updatedProducer = await this.producerRepository
+      .createQueryBuilder('producer')
+      .leftJoinAndSelect('producer.farms', 'farms')
+      .where('producer.id = :id', { id })
+      .getOne();
+
+    return updatedProducer;
   }
 }
