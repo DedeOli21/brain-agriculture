@@ -21,7 +21,6 @@ export const dataSourceOptions: DataSourceOptions = {
     : ['src/migrations/*{.ts,.js}'],
   synchronize: false, // Nunca use true em produção
   migrationsRun: true,
-  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
 };
 
 export const AppDataSource = new DataSource(dataSourceOptions);

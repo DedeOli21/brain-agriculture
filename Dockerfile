@@ -24,7 +24,7 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY package.json yarn.lock ./
 
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 
 EXPOSE 3000
 

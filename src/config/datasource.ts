@@ -5,6 +5,9 @@ config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+console.log('isProduction', isProduction);
+console.log('process.env.DATABASE_URL', process.env.DATABASE_URL);
+
 export const AppDataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL || undefined,
@@ -20,8 +23,7 @@ export const AppDataSource = new DataSource({
     ? ['dist/src/migrations/*.js']
     : ['src/migrations/*.ts'],
   synchronize: false,
-  migrationsRun: true,
-  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
+  migrationsRun: true
 });
 
 export default AppDataSource;
