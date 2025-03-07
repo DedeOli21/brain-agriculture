@@ -14,8 +14,8 @@ export const dataSourceOptions: DataSourceOptions = {
   password: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_PASSWORD || 'password',
   database: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_DATABASE || 'brain_agriculture',
   entities: isProduction
-    ? ['dist/src/domain/entities/*.entity{.ts,.js}']  // Para produção (Railway)
-    : ['src/domain/entities/*.entity{.ts,.js}'], // Para desenvolvimento local
+    ? ['dist/src/domain/entities/**/*.entity{.ts,.js}']  // Para produção (Railway)
+    : ['src/domain/entities/**/*.entity{.ts,.js}'], // Para desenvolvimento local
   migrations: isProduction
     ? ['dist/src/migrations/*{.ts,.js}']
     : ['src/migrations/*{.ts,.js}'],
