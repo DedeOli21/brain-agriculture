@@ -59,6 +59,7 @@ export class DataBaseConnectionService implements TypeOrmOptionsFactory {
       synchronize: false,
       migrationsRun: true,
       autoLoadEntities: true,
+      logging: true,
     };
   }
 }
