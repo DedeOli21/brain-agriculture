@@ -26,7 +26,7 @@ export class ManualMigration1741354018509 implements MigrationInterface {
                 id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
                 name varchar NOT NULL,
                 year int NOT NULL,
-                farm_id uuid NOT NULL REFERENCES farm(id)
+                farm uuid NOT NULL REFERENCES farm(id)
             )`,
     );
 

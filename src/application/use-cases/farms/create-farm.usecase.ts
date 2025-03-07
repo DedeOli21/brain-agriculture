@@ -22,6 +22,10 @@ export class CreateFarmUseCase {
 
     const producer = await this.producerRepository.findProducerById(producerId);
 
+    if (!producer) {
+      throw new BadRequestException('Producer not found');
+    }
+
     return await this.farmRepository.create({
       ...payload,
       producerId: producer.id,

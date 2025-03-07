@@ -37,12 +37,11 @@ export class ProducerImplementation implements IProducerRepository {
   }
 
   async findProducerById(id: string): Promise<FindOneProducerResponseDto> {
-    const producer = await this.producerRepository
-      .createQueryBuilder('producer')
-      .leftJoinAndSelect('producer.farms', 'farms')
-      .where('producer.id = :id', { id })
-      .getOne();
 
+    console.log('ID', id);
+    const producer = await this.producerRepository.findOneBy({ id: id });
+
+    console.log('PRODUCER REPO', producer);
     return producer;
   }
 
