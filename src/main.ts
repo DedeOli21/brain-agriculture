@@ -10,7 +10,9 @@ async function bootstrap() {
   app.useLogger(logger);
 
   setupSwagger(app);
-
+  const port = process.env.PORT || 3000;
+  
   await app.listen(3000);
+  console.log(`🚀 Server running on http://localhost:${port}`);
 }
 bootstrap();
