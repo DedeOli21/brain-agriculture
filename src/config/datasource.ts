@@ -18,7 +18,7 @@ console.log('🔍 Buscando entidades em:', entityPath);
 console.log('isProduction', isProduction);
 console.log('process.env.DATABASE_URL', process.env.DATABASE_URL);
 
-export const AppDataSource = new DataSource({
+const AppDataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL || undefined,
   host: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_HOST || 'localhost',
