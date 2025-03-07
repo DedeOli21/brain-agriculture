@@ -1,13 +1,14 @@
 import { DataSource } from 'typeorm';
 import { config } from 'dotenv';
+import { join } from 'path';
 
 config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 const entityPath = isProduction
-  ? [__dirname + '/../domain/entities/**/*.entity.js']
-  : ['src/domain/entities/**/*.entity.ts'];
+? [join(__dirname, '..', '..', 'domain', 'entities', '*.entity.js')]
+: [join(__dirname, '..', '..', 'src', 'domain', 'entities', '*.entity.{ts,js}')]
 
 console.log('🔍 Buscando entidades em:', entityPath);
 

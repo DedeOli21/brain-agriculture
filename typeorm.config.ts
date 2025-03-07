@@ -6,7 +6,7 @@ config();
 const isProduction = process.env.NODE_ENV === 'production';
 
 const entityPath = isProduction
-    ? [__dirname + '/../domain/entities/**/*.entity.js'] // Atual
+    ? [__dirname + '/../../domain/entities/index.js'] // Atual
     : ['src/domain/entities/**/*.entity.ts'] // Local
 
 console.log('🔍 Buscando entidades em:', entityPath); // Log para depuração
