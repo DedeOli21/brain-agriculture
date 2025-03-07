@@ -15,7 +15,7 @@ export abstract class IProducerRepository {
   ) => Promise<CreateProducerResponseDto>;
   findProducerById: (id: string) => Promise<FindOneProducerResponseDto>;
   findAll: (
-    input: FindAllProducerQueryRequestDto,
+    input?: FindAllProducerQueryRequestDto,
   ) => Promise<FindAllProducerResponseDto>;
   delete: (id: string) => void;
   update: (

@@ -39,7 +39,7 @@ export class ProducerImplementation implements IProducerRepository {
   }
 
   async findAll(
-    input: FindAllProducerQueryRequestDto,
+    input?: FindAllProducerQueryRequestDto,
   ): Promise<FindAllProducerResponseDto> {
     const result = await this.producerRepository.find({
       relations: [
