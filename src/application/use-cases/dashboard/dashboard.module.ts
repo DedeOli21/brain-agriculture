@@ -7,5 +7,6 @@ import { DatabaseModule } from '@infra/database/database.module';
   imports: [DatabaseModule],
   controllers: [DashboardController],
   providers: [GetDashboardUseCase],
+  exports: [GetDashboardUseCase],
 })
 export class DashboardModule {}

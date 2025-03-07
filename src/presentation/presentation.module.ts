@@ -6,6 +6,7 @@ import { SeasonController } from '@presentation/controllers/seasons/season.contr
 
 import { ProducersController } from '@presentation/controllers/producers/producers.controller';
 import { ApplicationModule } from '@app/application.module';
+import { DashboardController } from './controllers/dashboard/dashboard.controller';
 
 @Module({
   imports: [ApplicationModule],
@@ -15,6 +16,7 @@ import { ApplicationModule } from '@app/application.module';
     ProducersController,
     CropsController,
     SeasonController,
+    DashboardController
   ],
 })
 export class PresentationModule {}

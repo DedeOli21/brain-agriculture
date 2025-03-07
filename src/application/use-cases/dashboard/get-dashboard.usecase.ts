@@ -31,8 +31,8 @@ export class GetDashboardUseCase {
       farmsByState,
       cropsDistribution,
       landUsage: [
-        { type: 'Área Agricultável', area: landUsage.arablearea || 0 },
-        { type: 'Área de Vegetação', area: landUsage.vegetationarea || 0 },
+        { type: 'Área Agricultável', area: landUsage?.arablearea || 0 },
+        { type: 'Área de Vegetação', area: landUsage?.vegetationarea || 0 },
       ],
     };
   }
