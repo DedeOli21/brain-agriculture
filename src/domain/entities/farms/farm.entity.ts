@@ -8,7 +8,7 @@ import {
 import { Producer } from '../producers/producer.entity';
 import { Season } from '../season/season.entity';
 
-@Entity()
+@Entity('farm')
 export class Farm {
   @PrimaryGeneratedColumn('uuid')
   id: string;
