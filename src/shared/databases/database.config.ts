@@ -33,7 +33,6 @@ export class DataBaseConnectionService implements TypeOrmOptionsFactory {
         false,
       ),
       migrationsRun: true,
-      ssl: databaseUrl ? { rejectUnauthorized: false } : undefined,
     };
   }
 }
