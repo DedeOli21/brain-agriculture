@@ -71,8 +71,10 @@ describe('CreateProducerUseCase', () => {
 
     jest.spyOn(documentValidator, 'isValidDocument').mockReturnValue(true);
 
-    producerRepository.findProducerByDocument.mockResolvedValue({} as FindOneProducerResponseDto);
- 
+    producerRepository.findProducerByDocument.mockResolvedValue(
+      {} as FindOneProducerResponseDto,
+    );
+
     await expect(useCase.execute(payload)).rejects.toThrow();
   });
 
@@ -81,7 +83,10 @@ describe('CreateProducerUseCase', () => {
 
     jest.spyOn(documentValidator, 'isValidDocument').mockReturnValue(true);
     producerRepository.findProducerByDocument.mockResolvedValue(null);
-    producerRepository.create.mockResolvedValue({ id: '1', ...payload } as never);
+    producerRepository.create.mockResolvedValue({
+      id: '1',
+      ...payload,
+    } as never);
 
     const result = await useCase.execute(payload);
 

@@ -43,7 +43,7 @@ describe('FindAllProducerUseCase', () => {
         name: 'Producer 2',
         document: '987654321',
         farms: [],
-      }
+      },
     ];
     jest.spyOn(producerRepository, 'findAll').mockResolvedValue(producers);
 

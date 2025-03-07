@@ -15,18 +15,22 @@ export class ProducerImplementation implements IProducerRepository {
     private readonly producerRepository: Repository<Producer>,
   ) {}
 
-  create(payload: CreateProducerRequestDto): Promise<CreateProducerResponseDto> {
+  create(
+    payload: CreateProducerRequestDto,
+  ): Promise<CreateProducerResponseDto> {
     return this.producerRepository.save(payload);
   }
 
-  findProducerByDocument(document: string): Promise<FindOneProducerResponseDto> {
+  findProducerByDocument(
+    document: string,
+  ): Promise<FindOneProducerResponseDto> {
     return this.producerRepository.findOne({
       where: { document },
       relations: ['farms'],
     });
   }
 
-  findProducerById(id: string): Promise<FindOneProducerResponseDto> { 
+  findProducerById(id: string): Promise<FindOneProducerResponseDto> {
     return this.producerRepository.findOne({
       where: { id },
       relations: ['farms'],
@@ -48,7 +52,9 @@ export class ProducerImplementation implements IProducerRepository {
     this.producerRepository.delete(id);
   }
 
-  async update(payload: UpdateProducerRequestDto): Promise<UpdateProducerResponseDto> {
+  async update(
+    payload: UpdateProducerRequestDto,
+  ): Promise<UpdateProducerResponseDto> {
     const { id } = payload;
     await this.producerRepository.update(id, payload);
     return this.producerRepository.findOne({ where: { id } });

@@ -6,8 +6,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 describe('GetDashboardUseCase', () => {
   let getDashboardUseCase: GetDashboardUseCase;
-  let farmRepository: IFarmRepository;
   let cropRepository: ICropRepository;
+  let farmRepository: IFarmRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -128,6 +128,32 @@ describe('GetDashboardUseCase', () => {
     expect(result).toEqual({
       totalFarms,
       totalHectares: 0,
+      farmsByState,
+      cropsDistribution,
+      landUsage: [
+        { type: 'Área Agricultável', area: landUsage.arableArea },
+        { type: 'Área de Vegetação', area: landUsage.vegetationArea },
+      ],
+    });
+  });
+
+  it('should return cropsDistribution as empty array if countByCrop returns null', async () => {
+    const totalFarms = 10;
+    const totalHectares = { total: 1000 };
+    const farmsByState = [
+      { state: 'State1', count: 5 },
+      { state: 'State2', count: 5 },
+    ];
+    const cropsDistribution = [];
+    const landUsage = { arableArea: 600, vegetationArea: 400 };
+
+    jest.spyOn(cropRepository, 'countByCrop').mockResolvedValue([]);
+
+    const result: DashboardResponseDto = await getDashboardUseCase.execute();
+
+    expect(result).toEqual({
+      totalFarms,
+      totalHectares: totalHectares.total,
       farmsByState,
       cropsDistribution,
       landUsage: [

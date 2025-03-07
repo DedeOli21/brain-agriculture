@@ -16,7 +16,7 @@ import { DeleteProducerUseCase } from './delete-producer.usecase';
     FindByDocumentUseCase,
     FindByIdUseCase,
     UpdateProducerUseCase,
-    DeleteProducerUseCase
+    DeleteProducerUseCase,
   ],
   exports: [
     CreateProducerUseCase,
@@ -24,7 +24,7 @@ import { DeleteProducerUseCase } from './delete-producer.usecase';
     FindByDocumentUseCase,
     FindByIdUseCase,
     UpdateProducerUseCase,
-    DeleteProducerUseCase
+    DeleteProducerUseCase,
   ],
   controllers: [ProducersController],
 })

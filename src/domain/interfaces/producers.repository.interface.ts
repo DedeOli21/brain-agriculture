@@ -9,9 +9,13 @@ export abstract class IProducerRepository {
   findProducerByDocument: (
     document: string,
   ) => Promise<FindOneProducerResponseDto>;
-  create: (payload: CreateProducerRequestDto) => Promise<CreateProducerResponseDto>;
+  create: (
+    payload: CreateProducerRequestDto,
+  ) => Promise<CreateProducerResponseDto>;
   findProducerById: (id: string) => Promise<FindOneProducerResponseDto>;
   findAll: () => Promise<FindAllProducerResponseDto[]>;
   delete: (id: string) => void;
-  update: (payload: UpdateProducerRequestDto) => Promise<UpdateProducerResponseDto>;
+  update: (
+    payload: UpdateProducerRequestDto,
+  ) => Promise<UpdateProducerResponseDto>;
 }

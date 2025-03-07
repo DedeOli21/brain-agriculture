@@ -8,5 +8,4 @@ export class CreateCropDto {
   @IsString()
   @IsNotEmpty()
   name: string;
-
 }

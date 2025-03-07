@@ -6,7 +6,6 @@ import { IProducerRepository } from '@domain/interfaces/producers.repository.int
 import { Farm } from '@domain/entities/farms/farm.entity';
 import { CreateFarmRequestDto } from '@app/use-cases/farms/dto/request/create-request.dto';
 import { Producer } from '@domain/entities/producers/producer.entity';
-import { FindFarmResponseDto } from '@app/use-cases/farms/dto/response/findById-response.dto';
 
 describe('CreateFarmUseCase', () => {
   let createFarmUseCase: CreateFarmUseCase;

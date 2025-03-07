@@ -1,38 +1,31 @@
-# Etapa 1: Build
+# Etapa de build
 FROM node:23-alpine AS builder
 
 WORKDIR /app
 
-# Copia apenas os arquivos essenciais primeiro para aproveitar o cache
+# Copia apenas os arquivos necessários para instalar dependências
 COPY package.json yarn.lock ./
 
 RUN yarn install --frozen-lockfile
 
-# Agora copia o restante dos arquivos do projeto
+# Copia todo o código-fonte
 COPY . .
 
-RUN yarn build && ls -la /app/dist
+# Compila o projeto
+RUN yarn build
 
-RUN echo "Build completed" && ls -la /app
-
-# Etapa 2: Produção
+# Etapa final
 FROM node:23-alpine
 
 WORKDIR /app
 
-# Criação de um usuário não-root para rodar o Node.js
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-RUN chown -R appuser:appgroup /app
-
-# Copia apenas os arquivos necessários para rodar a aplicação
+# Copia apenas os arquivos necessários da etapa de build
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
-COPY package.json ./
+COPY package.json yarn.lock ./
 
 ENV NODE_ENV=production
+
 EXPOSE 3000
 
-# Executa o container com um usuário seguro
-USER appuser
-
-CMD ["node", "./dist/src/main.js"]
+CMD ["node", "dist/main.js"]
