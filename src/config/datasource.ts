@@ -8,7 +8,7 @@ config();
 const isProduction = process.env.NODE_ENV === 'production';
 
 const entityPath = isProduction
-  ? globSync(join(dirname(__dirname), '..', 'domain', 'entities', '**', '*.entity.js'))
+  ? globSync(join(__dirname, '..', 'domain', 'entities', '**', '*.entity.js'))
   : globSync(join(__dirname, '..', '..', 'src', 'domain', 'entities', '**', '*.entity.{ts,js}'));
 
 console.log('Entity path resolved to:', entityPath);
