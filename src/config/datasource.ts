@@ -1,14 +1,17 @@
 import { DataSource } from 'typeorm';
 import { config } from 'dotenv';
-import { join } from 'path';
+import { dirname, join } from 'path';
+import { globSync } from 'glob';
 
 config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 const entityPath = isProduction
-? [join(__dirname, '..', '..', 'domain', 'entities', '*.entity.js')]
-: [join(__dirname, '..', '..', 'src', 'domain', 'entities', '*.entity.{ts,js}')]
+  ? globSync(join(dirname(__dirname), '..', 'domain', 'entities', '**', '*.entity.js'))
+  : globSync(join(__dirname, '..', '..', 'src', 'domain', 'entities', '**', '*.entity.{ts,js}'));
+
+console.log('Entity path resolved to:', entityPath);
 
 console.log('🔍 Buscando entidades em:', entityPath);
 
