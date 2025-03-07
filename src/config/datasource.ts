@@ -1,26 +1,28 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { Crop } from '@domain/entities/crops/crop.entity';
+import { Farm } from '@domain/entities/farms/farm.entity';
+import { Harvest } from '@domain/entities/harvest/harvest.entity';
+import { Producer } from '@domain/entities/producers/producer.entity';
+import { Season } from '@domain/entities/season/season.entity';
 import { DataSource } from 'typeorm';
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
-let config: TypeOrmModuleOptions & PostgresConnectionOptions = {
+console.log('Entities being loaded:', [Producer, Farm, Crop, Harvest, Season]);
+
+const datasource = new DataSource({
   type: 'postgres',
-  host: process.env.DB_HOST,
-  port: +process.env.DB_PORT,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  entities: ['src/domain/entities/**/*.ts'],
+  url: process.env.DATABASE_URL,
+  host: process.env.DB_HOST || 'localhost',
+  port: Number(process.env.DB_PORT) || 5432,
+  username: process.env.DB_USERNAME || 'admin',
+  password: process.env.DB_PASSWORD || 'password',
+  database: process.env.DB_DATABASE || 'brain_agriculture',
+  entities: [Producer, Farm, Crop, Season, Harvest],
+  migrations: ['dist/migrations/*.js'],
   synchronize: false,
-  migrationsRun: false,
-  migrations: ['src/migrations/**/*.ts'],
-};
+  migrationsRun: true,
+  ssl:
+    process.env.NODE_ENV === 'production'
+      ? { rejectUnauthorized: false }
+      : false,
+});
 
-config = {
-  ...config,
-  migrationsRun: false,
-  migrationsTransactionMode: 'each',
-  synchronize: false,
-};
-
-export const datasource = new DataSource(config);
-export { config };
+export default datasource;

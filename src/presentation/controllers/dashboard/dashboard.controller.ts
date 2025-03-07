@@ -9,14 +9,14 @@ export class DashboardController {
 
   @Get('all-data')
   @ApiOperation({ summary: 'Get all data from dashboard' })
-  @ApiResponse({ 
-    status: 200, 
-    description: 'The data has been successfully retrieved', 
-    type: DashboardResponseDto 
+  @ApiResponse({
+    status: 200,
+    description: 'The data has been successfully retrieved',
+    type: DashboardResponseDto,
   })
-  @ApiResponse({ 
-    status: 400, 
-    description: 'Bad Request' 
+  @ApiResponse({
+    status: 400,
+    description: 'Bad Request',
   })
   async getDashboard(): Promise<DashboardResponseDto> {
     return this.getDashboardService.execute();

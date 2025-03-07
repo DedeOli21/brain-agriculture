@@ -12,13 +12,26 @@ export class DataBaseConnectionService implements TypeOrmOptionsFactory {
     return {
       type: 'postgres',
       url: databaseUrl || undefined,
-      host: databaseUrl ? undefined : this.configService.get<string>('TYPEORM_HOST'),
-      port: databaseUrl ? undefined : Number(this.configService.get<number>('TYPEORM_PORT')),
-      username: databaseUrl ? undefined : this.configService.get<string>('TYPEORM_USERNAME'),
-      password: databaseUrl ? undefined : this.configService.get<string>('TYPEORM_PASSWORD'),
-      database: databaseUrl ? undefined : this.configService.get<string>('TYPEORM_DATABASE'),
+      host: databaseUrl
+        ? undefined
+        : this.configService.get<string>('TYPEORM_HOST'),
+      port: databaseUrl
+        ? undefined
+        : Number(this.configService.get<number>('TYPEORM_PORT')),
+      username: databaseUrl
+        ? undefined
+        : this.configService.get<string>('TYPEORM_USERNAME'),
+      password: databaseUrl
+        ? undefined
+        : this.configService.get<string>('TYPEORM_PASSWORD'),
+      database: databaseUrl
+        ? undefined
+        : this.configService.get<string>('TYPEORM_DATABASE'),
       entities: [this.configService.get<string>('TYPEORM_ENTITIES')],
-      synchronize: this.configService.get<boolean>('TYPEORM_SYNCHRONIZE', false),
+      synchronize: this.configService.get<boolean>(
+        'TYPEORM_SYNCHRONIZE',
+        false,
+      ),
       migrationsRun: true,
       ssl: databaseUrl ? { rejectUnauthorized: false } : undefined,
     };
