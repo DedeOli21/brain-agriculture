@@ -15,6 +15,7 @@ export class FarmImplementation implements IFarmRepository {
   ) {}
 
   create(payload: CreateFarmRequestDto): Promise<CreateFarmResponseDto> {
+    console.log('PAYLOAD', payload);
     return this.farmRepository.save(payload);
   }
 
