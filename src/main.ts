@@ -8,13 +8,6 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 async function bootstrap() {
   
-  await AppDataSource.initialize()
-  .then(() => {
-    console.log('✅ Banco de dados conectado com sucesso!');
-    console.log('📌 Entidades carregadas:', AppDataSource.entityMetadatas.map(e => e.name));
-  })
-  .catch((error) => console.error('❌ Erro ao conectar no banco:', error));
-  
   const app = await NestFactory.create(AppModule);
 
   const logger = app.get(Logger);
