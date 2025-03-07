@@ -9,7 +9,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const entityPath = isProduction
   ? globSync(join(__dirname, '..', 'domain', 'entities', '**', '*.entity.{ts,js}'))
-  : globSync(join(__dirname, '..', '..', 'src', 'domain', 'entities', '**', '*.entity.{ts,js}'));
+  : globSync(join(__dirname, '..', '..', 'domain', 'entities', '**', '*.entity.{ts,js}'));
 
 console.log('🔍 Buscando entidades em:', entityPath); // Log para depuração
 
@@ -23,7 +23,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_DATABASE || 'brain_agriculture',
   entities: entityPath,
   migrations: isProduction
-    ? ['dist/src/migrations/*.js']
+    ? ['dist/migrations/*.js']
     : ['src/migrations/*.ts'],
   synchronize: false,
   migrationsRun: true,

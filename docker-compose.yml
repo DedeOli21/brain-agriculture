@@ -35,7 +35,7 @@ services:
       TYPEORM_AUTO_LOAD_ENTITIES: true
       TYPEORM_ENTITIES: dist/**/*.entity.js
       TYPEORM_MIGRATIONS: dist/**/migrations/*.js
-    command: ["node", "dist/src/main.js"]
+    command: ["node", "dist/main.js"]
 
 volumes:
   pgdata:

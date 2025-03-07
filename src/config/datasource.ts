@@ -16,7 +16,6 @@ const entityPath = isProduction
         __dirname,
         '..',
         '..',
-        'src',
         'domain',
         'entities',
         '**',
@@ -50,10 +49,10 @@ const AppDataSource = new DataSource({
     ? undefined
     : process.env.TYPEORM_DATABASE || 'brain_agriculture',
   entities: isProduction
-    ? ['dist/src/domain/entities/**/*.entity.js'] // Agora apontando corretamente para dist/src
-    : ['src/domain/entities/**/*.entity.ts'], // Caminho correto no desenvolvimento
+    ? ['dist/domain/entities/**/*.entity.js']
+    : ['src/domain/entities/**/*.entity.ts'], 
   migrations: isProduction
-    ? ['dist/src/migrations/*.js']
+    ? ['dist/migrations/*.js']
     : ['src/migrations/*.ts'],
   synchronize: false,
   migrationsRun: true,
