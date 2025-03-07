@@ -10,6 +10,8 @@ config();
 
 console.log('Entities being loaded:', [Producer, Farm, Crop, Season, Harvest]);
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const datasource = new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL || undefined,
@@ -18,8 +20,12 @@ const datasource = new DataSource({
   username: process.env.DATABASE_URL ? undefined : process.env.DB_USERNAME || 'admin',
   password: process.env.DATABASE_URL ? undefined : process.env.DB_PASSWORD || 'password',
   database: process.env.DATABASE_URL ? undefined : process.env.DB_DATABASE || 'brain_agriculture',
-  entities: [Producer, Farm, Crop, Season, Harvest],
-  migrations: ['dist/migrations/*.js'],
+  entities: isProduction
+  ? [__dirname + '/../**/*.entity.js'] // Para produção (Railway)
+  : [__dirname + '/../**/*.entity.ts'], // Para desenvolvimento
+  migrations: isProduction
+  ? [__dirname + '/../migrations/*.js']
+  : [__dirname + '/../migrations/*.ts'],
   synchronize: false,
   migrationsRun: true,
   ssl: process.env.DATABASE_URL
