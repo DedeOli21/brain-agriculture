@@ -1,13 +1,15 @@
 import { DataSource } from 'typeorm';
 import { config } from 'dotenv';
+import { globSync } from 'glob';
+import { join } from 'path';
 
 config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 const entityPath = isProduction
-    ? [__dirname + '/../../domain/entities/index.js'] // Atual
-    : ['src/domain/entities/**/*.entity.ts'] // Local
+  ? globSync(join(__dirname, '..', 'domain', 'entities', '**', '*.entity.{ts,js}'))
+  : globSync(join(__dirname, '..', '..', 'src', 'domain', 'entities', '**', '*.entity.{ts,js}'));
 
 console.log('🔍 Buscando entidades em:', entityPath); // Log para depuração
 
