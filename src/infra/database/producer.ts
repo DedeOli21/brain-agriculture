@@ -31,11 +31,14 @@ export class ProducerImplementation implements IProducerRepository {
     });
   }
 
-  findProducerById(id: string): Promise<FindOneProducerResponseDto> {
-    return this.producerRepository.findOne({
-      where: { id },
-      relations: ['farms'],
-    });
+  async findProducerById(id: string): Promise<FindOneProducerResponseDto> {
+    const producer = await this.producerRepository
+      .createQueryBuilder('producer')
+      .leftJoinAndSelect('producer.farms', 'farms') // Verifique se isso está correto
+      .where('producer.document = :document', { document })
+      .getOne();
+      
+    return producer;
   }
 
   async findAll(
