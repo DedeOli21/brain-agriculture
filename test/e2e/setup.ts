@@ -1,4 +1,4 @@
-import { config } from '@config/datasource';
+import { AppDataSource } from '@config/datasource';
 import { newDb, DataType } from 'pg-mem';
 import { DataSource } from 'typeorm';
 import { v4 } from 'uuid';
@@ -28,7 +28,7 @@ export const setupDataSource = async () => {
       'PostgreSQL 14.2, compiled by Visual C++ build 1914, 64-bit',
   });
 
-  const ds: DataSource = await db.adapters.createTypeormDataSource(config);
+  const ds: DataSource = await db.adapters.createTypeormDataSource(AppDataSource);
   await ds.initialize();
 
   await ds.synchronize();

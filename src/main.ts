@@ -7,7 +7,6 @@ import { AppDataSource } from 'typeorm.config';
 const isProduction = process.env.NODE_ENV === 'production';
 
 async function bootstrap() {
-  
   const app = await NestFactory.create(AppModule);
 
   const logger = app.get(Logger);

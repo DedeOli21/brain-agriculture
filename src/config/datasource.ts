@@ -5,6 +5,12 @@ config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+const entityPath = isProduction
+  ? ['dist/src/domain/entities/**/*.entity.js']
+  : ['src/domain/entities/**/*.entity.ts'];
+
+console.log('🔍 Buscando entidades em:', entityPath);
+
 console.log('isProduction', isProduction);
 console.log('process.env.DATABASE_URL', process.env.DATABASE_URL);
 
