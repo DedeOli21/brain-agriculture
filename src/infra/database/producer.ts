@@ -33,10 +33,6 @@ export class ProducerImplementation implements IProducerRepository {
       .where('producer.document = :document', { document })
       .getOne();
 
-    if (!producer) {
-      throw new NotFoundException(`Producer with document ${document} not found`);
-    }
-
     return producer;
   }
 
@@ -46,10 +42,6 @@ export class ProducerImplementation implements IProducerRepository {
       .leftJoinAndSelect('producer.farms', 'farms')
       .where('producer.id = :id', { id })
       .getOne();
-
-    if (!producer) {
-      throw new NotFoundException(`Producer with ID ${id} not found`);
-    }
 
     return producer;
   }

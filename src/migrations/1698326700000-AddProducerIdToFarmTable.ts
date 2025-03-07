@@ -19,7 +19,7 @@ export class AddProducerIdToFarmTable1698326700000
     await queryRunner.addColumn(
       'farm',
       new TableColumn({
-        name: 'producerId',
+        name: 'producer',
         type: 'uuid',
         isNullable: true, // Pode ser ajustado para false após a migração
       }),
@@ -29,7 +29,7 @@ export class AddProducerIdToFarmTable1698326700000
     await queryRunner.createForeignKey(
       'farm',
       new TableForeignKey({
-        columnNames: ['producerId'],
+        columnNames: ['producer'],
         referencedTableName: 'producer',
         referencedColumnNames: ['id'],
         onDelete: 'SET NULL', // Ou 'CASCADE', dependendo do comportamento desejado
@@ -39,7 +39,7 @@ export class AddProducerIdToFarmTable1698326700000
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     // Remover a chave estrangeira e a coluna
-    await queryRunner.dropForeignKey('farm', 'FK_producerId'); // Nome da chave estrangeira pode variar
-    await queryRunner.dropColumn('farm', 'producerId');
+    await queryRunner.dropForeignKey('farm', 'FK_producer'); // Nome da chave estrangeira pode variar
+    await queryRunner.dropColumn('farm', 'producer');
   }
 }
