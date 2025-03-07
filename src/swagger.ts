@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 
 export function setupSwagger(app: INestApplication): void {
   const config = new DocumentBuilder()
-    .setTitle('Minha API')
+    .setTitle('Brain Agriculture')
     .setDescription('Documentação da API NestJS')
     .setVersion('1.0')
     .addBearerAuth()
