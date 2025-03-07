@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { FindByIdUseCase } from '@app/use-cases/producers/find-by-id.usecase';
 import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
 import { FindOneProducerResponseDto } from '@app/use-cases/producers/dto/response/findOne-reponse.dto';
+import { BadRequestException } from '@nestjs/common';
 
 describe('FindByIdUseCase', () => {
   let findByIdUseCase: FindByIdUseCase;
@@ -14,7 +15,7 @@ describe('FindByIdUseCase', () => {
         {
           provide: IProducerRepository,
           useValue: {
-            findProducerById: jest.fn(),
+            findProducerById: jest.fn().mockResolvedValue({} as FindOneProducerResponseDto),
           },
         },
       ],
@@ -49,7 +50,6 @@ describe('FindByIdUseCase', () => {
     const id = '123';
     jest.spyOn(producerRepository, 'findProducerById').mockResolvedValue(null);
 
-    const result = await findByIdUseCase.execute(id);
-    expect(result).toBeNull();
+    await expect(findByIdUseCase.execute(id)).rejects.toThrow(BadRequestException);
   });
 });

@@ -14,8 +14,21 @@ export class DataBaseConnectionService implements TypeOrmOptionsFactory {
     const isProduction = process.env.NODE_ENV === 'production';
 
     const entityPath = isProduction
-    ? globSync(join(__dirname, '..', 'domain', 'entities', '**', '*.entity.js'))
-    : globSync(join(__dirname, '..', '..', 'src', 'domain', 'entities', '**', '*.entity.{ts,js}'));
+      ? globSync(
+          join(__dirname, '..', 'domain', 'entities', '**', '*.entity.js'),
+        )
+      : globSync(
+          join(
+            __dirname,
+            '..',
+            '..',
+            'src',
+            'domain',
+            'entities',
+            '**',
+            '*.entity.{ts,js}',
+          ),
+        );
 
     console.log('🔍 Buscando entidades em:', entityPath);
 
@@ -40,10 +53,12 @@ export class DataBaseConnectionService implements TypeOrmOptionsFactory {
       entities: entityPath,
       migrations: isProduction
         ? globSync(join(__dirname, '..', 'migrations', '*.js'))
-        : globSync(join(__dirname, '..', '..', 'src', 'migrations', '*.{ts,js}')),
+        : globSync(
+            join(__dirname, '..', '..', 'src', 'migrations', '*.{ts,js}'),
+          ),
       synchronize: false,
       migrationsRun: true,
-      autoLoadEntities: true
+      autoLoadEntities: true,
     };
   }
 }

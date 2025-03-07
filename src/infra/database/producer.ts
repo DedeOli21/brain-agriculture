@@ -8,6 +8,7 @@ import { CreateProducerResponseDto } from '@app/use-cases/producers/dto/response
 import { UpdateProducerResponseDto } from '@app/use-cases/producers/dto/response/update-response.dto';
 import { FindOneProducerResponseDto } from '@app/use-cases/producers/dto/response/findOne-reponse.dto';
 import { FindAllProducerResponseDto } from '@app/use-cases/producers/dto/response/findAll-reponse.dto';
+import { FindAllProducerQueryRequestDto } from '@app/use-cases/producers/dto/request/findAll-request.dto';
 
 export class ProducerImplementation implements IProducerRepository {
   constructor(
@@ -37,15 +38,24 @@ export class ProducerImplementation implements IProducerRepository {
     });
   }
 
-  findAll(): Promise<FindAllProducerResponseDto[]> {
-    return this.producerRepository.find({
+  async findAll(
+    input: FindAllProducerQueryRequestDto,
+  ): Promise<FindAllProducerResponseDto> {
+    const result = await this.producerRepository.find({
       relations: [
         'farms',
         'farms.seasons',
         'farms.seasons.crops',
         'farms.seasons.crops.harvests',
       ],
+      take: input.take,
+      skip: input.skip,
     });
+
+    return {
+      producers: result,
+      total: result.length,
+    };
   }
 
   delete(id: string): void {

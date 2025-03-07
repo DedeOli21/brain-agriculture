@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { FindAllProducerUseCase } from '@app/use-cases/producers/find-all.usecase';
 import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
 import { FindAllProducerResponseDto } from '@app/use-cases/producers/dto/response/findAll-reponse.dto';
+import { FindAllProducerQueryRequestDto } from '@app/use-cases/producers/dto/request/findAll-request.dto';
 
 describe('FindAllProducerUseCase', () => {
   let findAllProducerUseCase: FindAllProducerUseCase;
@@ -31,23 +32,17 @@ describe('FindAllProducerUseCase', () => {
   });
 
   it('should call producerRepository.findAll and return the result', async () => {
-    const producers: FindAllProducerResponseDto[] = [
-      {
-        id: '1',
-        name: 'Producer 1',
-        document: '123456789',
-        farms: [],
-      },
-      {
-        id: '2',
-        name: 'Producer 2',
-        document: '987654321',
-        farms: [],
-      },
-    ];
+    const producers: FindAllProducerResponseDto = {
+      producers: [],
+      total: 10
+    }
+    const input: FindAllProducerQueryRequestDto = {
+      skip: 1,
+      take: 10
+    }
     jest.spyOn(producerRepository, 'findAll').mockResolvedValue(producers);
 
-    const result = await findAllProducerUseCase.execute();
+    const result = await findAllProducerUseCase.execute(input);
 
     expect(producerRepository.findAll).toHaveBeenCalled();
     expect(result).toEqual(producers);

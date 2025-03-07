@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { Producer } from '@domain/entities/producers/producer.entity';
 import { CreateProducerUseCase } from '@app/use-cases/producers/create-producer.usecase';
@@ -22,6 +23,7 @@ import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { CreateProducerResponseDto } from '@app/use-cases/producers/dto/response/create-response.dto';
 import { FindAllProducerResponseDto } from '@app/use-cases/producers/dto/response/findAll-reponse.dto';
 import { DeleteProducerResponseDto } from '@app/use-cases/producers/dto/response/delete-response.dto';
+import { FindAllProducerQueryRequestDto } from '@app/use-cases/producers/dto/request/findAll-request.dto';
 
 @Controller('producers')
 export class ProducersController {
@@ -62,8 +64,10 @@ export class ProducersController {
     type: FindAllProducerResponseDto,
     isArray: true,
   })
-  findAll(): Promise<Producer[]> {
-    return this.findAllProducerUseCase.execute();
+  findAll(
+    @Query() input: FindAllProducerQueryRequestDto,
+  ): Promise<FindAllProducerResponseDto> {
+    return this.findAllProducerUseCase.execute(input);
   }
 
   @Get(':document')

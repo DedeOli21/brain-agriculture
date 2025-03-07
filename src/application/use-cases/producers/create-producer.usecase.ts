@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  InternalServerErrorException,
+  Injectable,
+} from '@nestjs/common';
 import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
 import { CreateProducerRequestDto } from '@app/use-cases/producers/dto/request/create-request.dto';
 import { isValidDocument } from '@shared/helpers/is-valid-document';
@@ -14,7 +18,7 @@ export class CreateProducerUseCase {
     const { document } = payload;
 
     if (!document) {
-      throw new Error('Document is required');
+      throw new InternalServerErrorException('Document is required');
     }
 
     const isValiDoc = isValidDocument(document);
@@ -28,7 +32,7 @@ export class CreateProducerUseCase {
     );
 
     if (producer) {
-      throw new Error('Producer already exists');
+      throw new BadRequestException('Producer already exists');
     }
 
     return await this.producerRepository.create(payload);

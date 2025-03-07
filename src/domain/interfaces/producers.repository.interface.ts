@@ -1,4 +1,5 @@
 import { CreateProducerRequestDto } from '@app/use-cases/producers/dto/request/create-request.dto';
+import { FindAllProducerQueryRequestDto } from '@app/use-cases/producers/dto/request/findAll-request.dto';
 import { UpdateProducerRequestDto } from '@app/use-cases/producers/dto/request/update-request.dto';
 import { CreateProducerResponseDto } from '@app/use-cases/producers/dto/response/create-response.dto';
 import { FindAllProducerResponseDto } from '@app/use-cases/producers/dto/response/findAll-reponse.dto';
@@ -13,7 +14,9 @@ export abstract class IProducerRepository {
     payload: CreateProducerRequestDto,
   ) => Promise<CreateProducerResponseDto>;
   findProducerById: (id: string) => Promise<FindOneProducerResponseDto>;
-  findAll: () => Promise<FindAllProducerResponseDto[]>;
+  findAll: (
+    input: FindAllProducerQueryRequestDto,
+  ) => Promise<FindAllProducerResponseDto>;
   delete: (id: string) => void;
   update: (
     payload: UpdateProducerRequestDto,

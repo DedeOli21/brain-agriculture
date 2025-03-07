@@ -16,7 +16,7 @@ import { DashboardController } from './controllers/dashboard/dashboard.controlle
     ProducersController,
     CropsController,
     SeasonController,
-    DashboardController
+    DashboardController,
   ],
 })
 export class PresentationModule {}
