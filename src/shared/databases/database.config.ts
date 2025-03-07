@@ -38,8 +38,12 @@ export class DataBaseConnectionService implements TypeOrmOptionsFactory {
         ? undefined
         : this.configService.get<string>('TYPEORM_DATABASE'),
       entities: entityPath,
+      migrations: isProduction
+        ? globSync(join(__dirname, '..', 'migrations', '*.js'))
+        : globSync(join(__dirname, '..', '..', 'src', 'migrations', '*.{ts,js}')),
       synchronize: false,
-      migrationsRun: true
+      migrationsRun: true,
+      autoLoadEntities: true
     };
   }
 }
