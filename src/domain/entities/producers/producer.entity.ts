@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Farm } from '../farms/farm.entity';
 
-@Entity('producers')
+@Entity('producer')
 export class Producer {
   @PrimaryGeneratedColumn('uuid')
   id: string;
