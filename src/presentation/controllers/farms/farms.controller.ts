@@ -26,6 +26,10 @@ export class FarmsController {
     status: HttpStatus.BAD_REQUEST,
     description: 'Bad Request',
   })
+  @ApiOperation({
+    summary: 'Find all farms',
+    description: 'This endpoint is used to find all farms',
+  })
   async findAll(
     @Query()
     input: FindAllFarmQueryRequestDto,

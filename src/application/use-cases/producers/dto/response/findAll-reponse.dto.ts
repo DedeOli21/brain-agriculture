@@ -12,13 +12,7 @@ export class FindAllProducerResponseDto {
   @ApiProperty({
     type: Producer,
     description: 'Producers',
-    example: [
-      {
-        id: '1',
-        name: 'Lucas',
-        document: '12345678901',
-      },
-    ],
+    example: Producer,
   })
   producers: Producer[];
 }
