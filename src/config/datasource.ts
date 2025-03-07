@@ -1,36 +1,27 @@
 import { DataSource } from 'typeorm';
 import { config } from 'dotenv';
-import { Producer } from '@domain/entities/producers/producer.entity';
-import { Farm } from '@domain/entities/farms/farm.entity';
-import { Crop } from '@domain/entities/crops/crop.entity';
-import { Season } from '@domain/entities/season/season.entity';
-import { Harvest } from '@domain/entities/harvest/harvest.entity';
 
 config();
 
-console.log('Entities being loaded:', [Producer, Farm, Crop, Season, Harvest]);
-
 const isProduction = process.env.NODE_ENV === 'production';
 
-const datasource = new DataSource({
+export const AppDataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL || undefined,
-  host: process.env.DATABASE_URL ? undefined : process.env.DB_HOST || 'localhost',
-  port: process.env.DATABASE_URL ? undefined : Number(process.env.DB_PORT) || 5432,
-  username: process.env.DATABASE_URL ? undefined : process.env.DB_USERNAME || 'admin',
-  password: process.env.DATABASE_URL ? undefined : process.env.DB_PASSWORD || 'password',
-  database: process.env.DATABASE_URL ? undefined : process.env.DB_DATABASE || 'brain_agriculture',
+  host: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_HOST || 'localhost',
+  port: process.env.DATABASE_URL ? undefined : Number(process.env.TYPEORM_PORT) || 5432,
+  username: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_USERNAME || 'admin',
+  password: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_PASSWORD || 'password',
+  database: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_DATABASE || 'brain_agriculture',
   entities: isProduction
-  ? [__dirname + '/../**/*.entity{.ts,.js}'] // Para produção (Railway)
-  : [__dirname + '/../**/*.entity{.ts,.js}'], // Para desenvolvimento
+    ? ['dist/src/domain/entities/*.entity.js'] // Agora apontando corretamente para dist/src
+    : ['src/domain/entities/*.entity.ts'], // Caminho correto no desenvolvimento
   migrations: isProduction
-  ? [__dirname + '/../migrations/*{.ts,.js}']
-  : [__dirname + '/../migrations/*{.ts,.js}'],
+    ? ['dist/src/migrations/*.js']
+    : ['src/migrations/*.ts'],
   synchronize: false,
   migrationsRun: true,
-  ssl: process.env.DATABASE_URL
-    ? { rejectUnauthorized: false } // Railway exige SSL
-    : false,
+  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
 });
 
-export default datasource;
+export default AppDataSource;
