@@ -14,10 +14,10 @@ export const dataSourceOptions: DataSourceOptions = {
   password: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_PASSWORD || 'password',
   database: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_DATABASE || 'brain_agriculture',
   entities: isProduction
-    ? ['dist/domain/entities/*.entity{.ts,.js}']  // Para produção (Railway)
+    ? ['dist/src/domain/entities/*.entity{.ts,.js}']  // Para produção (Railway)
     : ['src/domain/entities/*.entity{.ts,.js}'], // Para desenvolvimento local
   migrations: isProduction
-    ? ['dist/migrations/*{.ts,.js}']
+    ? ['dist/src/migrations/*{.ts,.js}']
     : ['src/migrations/*{.ts,.js}'],
   synchronize: false, // Nunca use true em produção
   migrationsRun: true,
