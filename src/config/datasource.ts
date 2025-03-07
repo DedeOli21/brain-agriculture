@@ -21,11 +21,11 @@ const datasource = new DataSource({
   password: process.env.DATABASE_URL ? undefined : process.env.DB_PASSWORD || 'password',
   database: process.env.DATABASE_URL ? undefined : process.env.DB_DATABASE || 'brain_agriculture',
   entities: isProduction
-  ? [__dirname + '/../**/*.entity.js'] // Para produção (Railway)
-  : [__dirname + '/../**/*.entity.ts'], // Para desenvolvimento
+  ? [__dirname + '/../**/*.entity{.ts,.js}'] // Para produção (Railway)
+  : [__dirname + '/../**/*.entity{.ts,.js}'], // Para desenvolvimento
   migrations: isProduction
-  ? [__dirname + '/../migrations/*.js']
-  : [__dirname + '/../migrations/*.ts'],
+  ? [__dirname + '/../migrations/*{.ts,.js}']
+  : [__dirname + '/../migrations/*{.ts,.js}'],
   synchronize: false,
   migrationsRun: true,
   ssl: process.env.DATABASE_URL
