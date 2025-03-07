@@ -24,9 +24,6 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY package.json yarn.lock ./
 
-RUN ls -la /app/dist/src/domain/entities/
-RUN ls -la /app/dist/src/domain/entities/producers/
-
 ENV NODE_ENV=development
 
 EXPOSE 3000
