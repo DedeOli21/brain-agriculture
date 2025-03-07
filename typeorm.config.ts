@@ -1,11 +1,17 @@
-import { DataSource, DataSourceOptions } from 'typeorm';
+import { DataSource } from 'typeorm';
 import { config } from 'dotenv';
 
 config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-export const dataSourceOptions: DataSourceOptions = {
+const entityPath = isProduction
+  ? ['dist/src/domain/entities/**/*.entity.js']
+  : ['src/domain/entities/**/*.entity.ts'];
+
+console.log('🔍 Buscando entidades em:', entityPath); // Log para depuração
+
+export const AppDataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL || undefined,
   host: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_HOST || 'localhost',
@@ -13,14 +19,13 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_USERNAME || 'admin',
   password: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_PASSWORD || 'password',
   database: process.env.DATABASE_URL ? undefined : process.env.TYPEORM_DATABASE || 'brain_agriculture',
-  entities: isProduction
-    ? ['dist/src/domain/entities/**/*.entity{.ts,.js}']  // Para produção (Railway)
-    : ['src/domain/entities/**/*.entity{.ts,.js}'], // Para desenvolvimento local
+  entities: entityPath,
   migrations: isProduction
-    ? ['dist/src/migrations/*{.ts,.js}']
-    : ['src/migrations/*{.ts,.js}'],
-  synchronize: false, // Nunca use true em produção
+    ? ['dist/src/migrations/*.js']
+    : ['src/migrations/*.ts'],
+  synchronize: false,
   migrationsRun: true,
-};
+  ssl: false,
+});
 
-export const AppDataSource = new DataSource(dataSourceOptions);
+console.log('📦 Configuração do TypeORM carregada com sucesso.');
