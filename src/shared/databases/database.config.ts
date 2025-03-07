@@ -17,6 +17,8 @@ export class DataBaseConnectionService implements TypeOrmOptionsFactory {
     ? globSync(join(__dirname, '..', 'domain', 'entities', '**', '*.entity.js'))
     : globSync(join(__dirname, '..', '..', 'src', 'domain', 'entities', '**', '*.entity.{ts,js}'));
 
+    console.log('🔍 Buscando entidades em:', entityPath);
+
     return {
       type: 'postgres',
       url: databaseUrl || undefined,
@@ -36,11 +38,8 @@ export class DataBaseConnectionService implements TypeOrmOptionsFactory {
         ? undefined
         : this.configService.get<string>('TYPEORM_DATABASE'),
       entities: entityPath,
-      synchronize: this.configService.get<boolean>(
-        'TYPEORM_SYNCHRONIZE',
-        false,
-      ),
-      migrationsRun: true,
+      synchronize: false,
+      migrationsRun: true
     };
   }
 }
