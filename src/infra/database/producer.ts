@@ -53,7 +53,7 @@ export class ProducerImplementation implements IProducerRepository {
       .createQueryBuilder('producer')
       .leftJoinAndSelect('producer.farms', 'farms')
       .leftJoinAndSelect('farms.seasons', 'seasons')
-      .leftJoinAndSelect('seasons.crops', 'crops')
+      .leftJoinAndSelect('seasons.crop', 'crops')
       .leftJoinAndSelect('crops.harvests', 'harvests')
       .take(take)
       .skip(skip)
