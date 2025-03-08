@@ -38,7 +38,7 @@ export class Crop extends BaseEntity {
     description: 'The description of the crop',
   })
   @ManyToOne(() => Season, (season) => season.crops, { cascade: false })
-  season: Season;
+  season?: Season;
 
   @Column({ type: 'uuid' })
   seasonId: string;

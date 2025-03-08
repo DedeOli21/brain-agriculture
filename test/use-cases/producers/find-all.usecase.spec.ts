@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FindAllProducerUseCase } from '@app/use-cases/producers/find-all.usecase';
-import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
-import { FindAllProducerResponseDto } from '@app/use-cases/producers/dto/response/findAll-reponse.dto';
-import { FindAllProducerQueryRequestDto } from '@app/use-cases/producers/dto/request/findAll-request.dto';
+import { FindAllProducerUseCase } from '../../../src/application/use-cases/producers/find-all.usecase';
+import { IProducerRepository } from '../../../src/domain/interfaces/producers.repository.interface';
+import { FindAllProducerResponseDto } from '../../../src/application/use-cases/producers/dto/response/findAll-reponse.dto';
+import { FindAllProducerQueryRequestDto } from '../../../src/application/use-cases/producers/dto/request/findAll-request.dto';
 
 describe('FindAllProducerUseCase', () => {
   let findAllProducerUseCase: FindAllProducerUseCase;

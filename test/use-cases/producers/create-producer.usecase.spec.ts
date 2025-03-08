@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateProducerUseCase } from '@app/use-cases/producers/create-producer.usecase';
-import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
-import { CreateProducerRequestDto } from '@app/use-cases/producers/dto/request/create-request.dto';
+import { CreateProducerUseCase } from '../../../src/application/use-cases/producers/create-producer.usecase';
+import { IProducerRepository } from '@../../../src/domain/interfaces/producers.repository.interface';
+import { CreateProducerRequestDto } from '../../../src/application/use-cases/producers/dto/request/create-request.dto';
 import { BadRequestException } from '@nestjs/common';
-import * as documentValidator from '@shared/helpers/is-valid-document';
-import { FindOneProducerResponseDto } from '@app/use-cases/producers/dto/response/findOne-reponse.dto';
+import * as documentValidator from '../../../src/shared/helpers/is-valid-document';
+import { FindOneProducerResponseDto } from '../../../src/application/use-cases/producers/dto/response/findOne-reponse.dto';
 
 const mockDto = (props: Partial<CreateProducerRequestDto>) => {
   return {

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FindByIdUseCase } from '@app/use-cases/producers/find-by-id.usecase';
-import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
-import { FindOneProducerResponseDto } from '@app/use-cases/producers/dto/response/findOne-reponse.dto';
+import { FindByIdUseCase } from '../../../src/application/use-cases/producers/find-by-id.usecase';
+import { IProducerRepository } from '../../../src/domain/interfaces/producers.repository.interface';
+import { FindOneProducerResponseDto } from '../../../src/application/use-cases/producers/dto/response/findOne-reponse.dto';
 import { BadRequestException } from '@nestjs/common';
 
 describe('FindByIdUseCase', () => {

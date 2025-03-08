@@ -20,7 +20,7 @@ export class ProducerImplementation implements IProducerRepository {
   async create(
     payload: CreateProducerRequestDto,
   ): Promise<CreateProducerResponseDto> {
-    const producer = this.producerRepository.create(payload);
+const producer = this.producerRepository.create(payload);
     return this.producerRepository.save(producer);
   }
 
@@ -29,7 +29,6 @@ export class ProducerImplementation implements IProducerRepository {
   ): Promise<FindOneProducerResponseDto> {
     const producer = await this.producerRepository
       .createQueryBuilder('producer')
-      .leftJoinAndSelect('producer.farms', 'farms')
       .where('producer.document = :document', { document })
       .getOne();
 

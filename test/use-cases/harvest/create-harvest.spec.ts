@@ -1,9 +1,9 @@
-import { CreateHarvestUseCase } from '@app/use-cases/harvest/create-harvest.usecase';
-import { CreateHarvestDto } from '@app/use-cases/harvest/dto/create-harvest.dto';
-import { Crop } from '@domain/entities/crops/crop.entity';
-import { Harvest } from '@domain/entities/harvest/harvest.entity';
-import { ICropRepository } from '@domain/interfaces/crop.repository.interface';
-import { IHarvestRepository } from '@domain/interfaces/harvest.repository.interface';
+import { CreateHarvestUseCase } from '../../../src/application/use-cases/harvest/create-harvest.usecase';
+import { CreateHarvestDto } from '../../../src/application/use-cases/harvest/dto/create-harvest.dto';
+import { Crop } from '../../../src/domain/entities/crops/crop.entity';
+import { Harvest } from '../../../src/domain/entities/harvest/harvest.entity';
+import { ICropRepository } from '../../../src/domain/interfaces/crop.repository.interface';
+import { IHarvestRepository } from '../../../src/domain/interfaces/harvest.repository.interface';
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 

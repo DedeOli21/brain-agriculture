@@ -1,4 +1,6 @@
+import { Producer } from '@domain/entities';
 import { IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
+import { P } from 'pino';
 
 export class CreateFarmRequestDto {
   @IsNotEmpty()

@@ -1,9 +1,9 @@
-import { CreateSeasonUseCase } from '@app/use-cases/season/create-season.usecase';
-import { CreateSeasonDto } from '@app/use-cases/season/dto/create-season.dto';
-import { Farm } from '@domain/entities/farms/farm.entity';
-import { Season } from '@domain/entities/season/season.entity';
-import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
-import { ISeasonRepository } from '@domain/interfaces/season.repository.interface';
+import { CreateSeasonUseCase } from '../../../src/application/use-cases/season/create-season.usecase';
+import { CreateSeasonDto } from '../../../src/application/use-cases/season/dto/create-season.dto';
+import { Farm } from '../../../src/domain/entities/farms/farm.entity';
+import { Season } from '../../../src/domain/entities/season/season.entity';
+import { IFarmRepository } from '../../../src/domain/interfaces/farms.repository.interface';
+import { ISeasonRepository } from '../../../src/domain/interfaces/season.repository.interface';
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 

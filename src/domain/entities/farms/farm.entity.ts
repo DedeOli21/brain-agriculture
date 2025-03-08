@@ -49,7 +49,7 @@ export class Farm {
     description: 'The total area of the farm',
   })
   @Column('decimal')
-  totalArea: number;
+  total_area: number;
 
   @ApiProperty({
     example: 50.5,
@@ -57,7 +57,7 @@ export class Farm {
     description: 'The arable area of the farm',
   })
   @Column('decimal')
-  arableArea: number;
+  arable_area: number;
 
   @ApiProperty({
     example: 50.5,
@@ -65,7 +65,7 @@ export class Farm {
     description: 'The vegetation area of the farm',
   })
   @Column('decimal')
-  vegetationArea: number;
+  vegetation_area: number;
 
   @ApiProperty({
     example: Producer,
@@ -73,8 +73,7 @@ export class Farm {
     description: 'the owner of the farm',
   })
   @ManyToOne(() => Producer, (producer) => producer.farms, { eager: false })
-  producerId: string;
-  // producerId: Producer;
+  producerId: Producer;
 
   @ApiProperty({
     example: [Season],

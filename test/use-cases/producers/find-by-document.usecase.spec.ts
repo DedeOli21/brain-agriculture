@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BadRequestException } from '@nestjs/common';
-import { FindByDocumentUseCase } from '@app/use-cases/producers/find-by-document.usecase';
-import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
-import * as documentValidator from '@shared/helpers/is-valid-document';
+import { FindByDocumentUseCase } from '../../../src/application/use-cases/producers/find-by-document.usecase';
+import { IProducerRepository } from '../../../src/domain/interfaces/producers.repository.interface';
+import * as documentValidator from '../../../src/shared/helpers/is-valid-document';
 
 jest.mock('@shared/helpers/is-valid-document', () => ({
   isValidDocument: jest.fn(),

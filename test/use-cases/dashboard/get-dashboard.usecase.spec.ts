@@ -1,8 +1,8 @@
-import { DashboardResponseDto } from '@app/use-cases/dashboard/dto/dashboard-response.dto';
-import { GetDashboardUseCase } from '@app/use-cases/dashboard/get-dashboard.usecase';
-import { ICropRepository } from '@domain/interfaces/crop.repository.interface';
-import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
-import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
+import { DashboardResponseDto } from '../../../src/application/use-cases/dashboard/dto/dashboard-response.dto';
+import { GetDashboardUseCase } from '../../../src/application/use-cases/dashboard/get-dashboard.usecase';
+import { ICropRepository } from '../../../src/domain/interfaces/crop.repository.interface';
+import { IFarmRepository } from '../../../src/domain/interfaces/farms.repository.interface';
+import { IProducerRepository } from '../../../src/domain/interfaces/producers.repository.interface';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('GetDashboardUseCase', () => {

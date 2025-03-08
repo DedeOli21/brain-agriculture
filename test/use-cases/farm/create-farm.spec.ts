@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { CreateFarmUseCase } from '@app/use-cases/farms/create-farm.usecase';
-import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
-import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
-import { Farm } from '@domain/entities/farms/farm.entity';
-import { CreateFarmRequestDto } from '@app/use-cases/farms/dto/request/create-request.dto';
-import { Producer } from '@domain/entities/producers/producer.entity';
+import { CreateFarmUseCase } from '../../../src/application/use-cases/farms/create-farm.usecase';
+import { IFarmRepository } from '../../../src/domain/interfaces/farms.repository.interface';
+import { IProducerRepository } from '../../../src/domain/interfaces/producers.repository.interface';
+import { Farm } from '../../../src/domain/entities/farms/farm.entity';
+import { CreateFarmRequestDto } from '../../../src/application/use-cases/farms/dto/request/create-request.dto';
+import { Producer } from '../../../src/domain/entities/producers/producer.entity';
 
 describe('CreateFarmUseCase', () => {
   let createFarmUseCase: CreateFarmUseCase;
@@ -100,10 +100,15 @@ describe('CreateFarmUseCase', () => {
 
     const farm: Farm = {
       id: '456',
-      producer,
-      totalArea: 100,
-      arableArea: 40,
-      vegetationArea: 50,
+      producerId: {
+        id: '123',
+        name: 'Test Producer',
+        document: '',
+        farms: [],
+      },
+      total_area: 100,
+      arable_area: 40,
+      vegetation_area: 50,
       name: '',
       city: '',
       state: '',

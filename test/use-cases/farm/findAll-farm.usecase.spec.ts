@@ -1,8 +1,8 @@
-import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
+import { IFarmRepository } from '../../../src/domain/interfaces/farms.repository.interface';
 import { Test, TestingModule } from '@nestjs/testing';
-import { FindAllFarmUseCase } from '@app/use-cases/farms/findAll-farm.usecase';
-import { FindAllFarmQueryRequestDto } from '@app/use-cases/farms/dto/request/findAll-request.dto';
-import { FindAllFarmResponseDto } from '@app/use-cases/farms/dto/response/findAll-response.dto';
+import { FindAllFarmUseCase } from '../../../src/application/use-cases/farms/findAll-farm.usecase';
+import { FindAllFarmQueryRequestDto } from '../../../src/application/use-cases/farms/dto/request/findAll-request.dto';
+import { FindAllFarmResponseDto } from '../../../src/application/use-cases/farms/dto/response/findAll-response.dto';
 
 describe('FindAllFarmUseCase', () => {
   let findAllFarmUseCase: FindAllFarmUseCase;

@@ -15,11 +15,11 @@
     "^@presentation/(.*)$": "<rootDir>/src/presentation/$1",
     "^@shared/(.*)$": "<rootDir>/src/shared/$1",
     "^@test/(.*)$": "<rootDir>/test/$1"
-  },
+  }, 
   "collectCoverage": true,
   "collectCoverageFrom": [
     "src/**/*.{ts,js}",
-    "!src/domain/entities/**",
+    "!src/domain/entities/**/*",
     "!src/migrations/**"
   ],
   "coveragePathIgnorePatterns": [

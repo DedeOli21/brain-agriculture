@@ -1,3 +1,4 @@
+import { CreateFarmRequestDto } from '@app/use-cases/farms/dto/request/create-request.dto';
 import { CreateProducerRequestDto } from '@app/use-cases/producers/dto/request/create-request.dto';
 import { FindAllProducerQueryRequestDto } from '@app/use-cases/producers/dto/request/findAll-request.dto';
 import { UpdateProducerRequestDto } from '@app/use-cases/producers/dto/request/update-request.dto';

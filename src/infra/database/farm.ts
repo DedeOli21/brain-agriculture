@@ -18,7 +18,7 @@ export class FarmImplementation implements IFarmRepository {
   create(payload: CreateFarmRequestDto): Promise<CreateFarmResponseDto> {
     const farm = this.farmRepository.create({
       ...payload,
-      seasons: [],
+      producerId: { id: payload.producerId } as any,
     });
     return this.farmRepository.save(farm);
   }
@@ -44,7 +44,7 @@ export class FarmImplementation implements IFarmRepository {
   totalArea(): Promise<TotalAreaDto> {
     return this.farmRepository
       .createQueryBuilder('farm')
-      .select('SUM(farm.totalArea)', 'total')
+      .select('SUM(farm.total_area)', 'total')
       .getRawOne();
   }
 
@@ -60,8 +60,8 @@ export class FarmImplementation implements IFarmRepository {
     return this.farmRepository
       .createQueryBuilder('farm')
       .select([
-        `SUM(farm.arableArea) as arableArea`,
-        `SUM(farm.vegetationArea) as vegetationArea`,
+        `SUM(farm.arable_area) as arableArea`,
+        `SUM(farm.vegetation_area) as vegetationArea`,
       ])
       .groupBy('farm.id')
       .getRawOne();
