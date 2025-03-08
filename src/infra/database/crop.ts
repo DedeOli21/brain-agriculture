@@ -17,16 +17,16 @@ export class CropImplementation implements ICropRepository {
   ) {}
 
   async create(crop: CreateCropDto): Promise<CreateCropResponseDto> {
-    const mewCrop = this.repository.create({
+    const newCrop = this.repository.create({
       ...crop,
-      season: crop.seasonId
+      season: { id: crop.seasonId }
     });
 
-    console.log('NEW CROP', mewCrop);
+    console.log('NEW CROP', newCrop);
 
-    const result = await this.repository.createQueryBuilder().insert().values(mewCrop).execute();
+    const result = await this.repository.save(newCrop);
 
-    return result.raw;
+    return result;
   }
 
   async findById(id: string): Promise<FindCropByIdResponseDto> {
