@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
 import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
 import { CreateFarmRequestDto } from './dto/request/create-request.dto';
@@ -23,7 +23,7 @@ export class CreateFarmUseCase {
     const producer = await this.producerRepository.findProducerById(producerId);
 
     if (!producer) {
-      throw new BadRequestException('Producer not found');
+      throw new NotFoundException('Producer not found');
     }
 
     return await this.farmRepository.create({

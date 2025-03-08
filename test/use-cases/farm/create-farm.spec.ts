@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { CreateFarmUseCase } from '@app/use-cases/farms/create-farm.usecase';
 import { IFarmRepository } from '@domain/interfaces/farms.repository.interface';
 import { IProducerRepository } from '@domain/interfaces/producers.repository.interface';
@@ -118,5 +118,23 @@ describe('CreateFarmUseCase', () => {
       producerId: producer.id,
     });
     expect(result).toEqual(farm);
+  });
+
+  it('should throw NotFoundException if producer is not found', async () => {
+    const payload: CreateFarmRequestDto = {
+      producerId: '123',
+      totalArea: 100,
+      arableArea: 40,
+      vegetationArea: 50,
+      name: '',
+      city: '',
+      state: '',
+    };
+
+    jest.spyOn(producerRepository, 'findProducerById').mockResolvedValue(null);
+
+    await expect(createFarmUseCase.execute(payload)).rejects.toThrow(
+      NotFoundException,
+    );
   });
 });
