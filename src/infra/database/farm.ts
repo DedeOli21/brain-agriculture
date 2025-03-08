@@ -16,13 +16,11 @@ export class FarmImplementation implements IFarmRepository {
   ) {}
 
   create(payload: CreateFarmRequestDto): Promise<CreateFarmResponseDto> {
-    console.log('PAYLOAD', payload);
-
     const farm = this.farmRepository.create({
       ...payload,
       seasons: [],
     });
-    return this.farmRepository.save(payload);
+    return this.farmRepository.save(farm);
   }
 
   findFarmByName(document: string): Promise<FindFarmResponseDto> {

@@ -11,8 +11,6 @@ const entityPath = isProduction
   ? globSync(join(__dirname, '..', 'domain', 'entities', '**', '*.entity.{ts,js}'))
   : globSync(join(__dirname, '..', '..', 'domain', 'entities', '**', '*.entity.{ts,js}'));
 
-console.log('🔍 Buscando entidades em:', entityPath); // Log para depuração
-
 export const AppDataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL || undefined,

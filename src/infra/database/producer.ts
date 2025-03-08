@@ -37,10 +37,8 @@ export class ProducerImplementation implements IProducerRepository {
   }
 
   async findProducerById(id: string): Promise<FindOneProducerResponseDto> {
-    console.log('ID', id);
     const producer = await this.producerRepository.findOneBy({ id: id });
 
-    console.log('PRODUCER REPO', producer);
     return {
       id: producer.id,
       name: producer.name,

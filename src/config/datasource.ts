@@ -23,13 +23,6 @@ const entityPath = isProduction
       ),
     );
 
-console.log('Entity path resolved to:', entityPath);
-
-console.log('🔍 Buscando entidades em:', entityPath);
-
-console.log('isProduction', isProduction);
-console.log('process.env.DATABASE_URL', process.env.DATABASE_URL);
-
 const AppDataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL || undefined,
@@ -48,9 +41,7 @@ const AppDataSource = new DataSource({
   database: process.env.DATABASE_URL
     ? undefined
     : process.env.TYPEORM_DATABASE || 'brain_agriculture',
-  entities: isProduction
-    ? ['dist/domain/entities/**/*.entity.js']
-    : ['src/domain/entities/**/*.entity.ts'],
+  entities: entityPath,
   migrations: isProduction ? ['dist/migrations/*.js'] : ['src/migrations/*.ts'],
   synchronize: false,
   migrationsRun: true,

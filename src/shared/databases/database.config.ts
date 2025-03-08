@@ -30,8 +30,6 @@ export class DataBaseConnectionService implements TypeOrmOptionsFactory {
           ),
         );
 
-    console.log('🔍 Buscando entidades em:', entityPath);
-
     return {
       type: 'postgres',
       url: databaseUrl || undefined,

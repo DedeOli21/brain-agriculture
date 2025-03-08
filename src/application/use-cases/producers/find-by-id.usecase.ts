@@ -10,7 +10,6 @@ export class FindByIdUseCase {
     const result = await this.producerRepository.findProducerById(id);
 
     if (!result) {
-      console.log('Producer not found');
       throw new BadRequestException('Producer not found');
     }
 
