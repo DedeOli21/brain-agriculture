@@ -18,7 +18,7 @@ export class Harvest {
     type: Number,
   })
   @Column({ type: 'decimal', precision: 10, scale: 2 })
-  amount: number; 
+  amount: number;
 
   @ApiProperty({
     example: '2021-10-10',
@@ -28,11 +28,10 @@ export class Harvest {
   @Column()
   harvestDate: Date; // Data da colheita
 
-
   @ApiProperty({
     example: '1',
     description: 'Crop id',
-    type: String
+    type: String,
   })
   @ManyToOne(() => Crop, (crop) => crop.harvests)
   crop: Crop; // Qual cultura essa colheita pertence

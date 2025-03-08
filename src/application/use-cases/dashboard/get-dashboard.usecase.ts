@@ -34,7 +34,10 @@ export class GetDashboardUseCase {
       totalFarms,
       totalHectares: totalHectares.total || 0,
       farmsByState,
-      cropsDistribution,
+      cropsDistribution: cropsDistribution.map((crop) => ({
+        crop: crop.name,
+        count: crop.count,
+      })),
       landUsage: [
         { type: 'Área Agricultável', area: landUsage?.arablearea || 0 },
         { type: 'Área de Vegetação', area: landUsage?.vegetationarea || 0 },

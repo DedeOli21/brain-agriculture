@@ -24,11 +24,13 @@ export class CropImplementation implements ICropRepository {
   }
 
   async countByCrop(): Promise<CountByCropDto[]> {
-    return this.repository
+    const result = await this.repository
       .createQueryBuilder('crop')
       .select('crop.name, COUNT(*) as count')
       .groupBy('crop.name')
       .getRawMany();
+
+    return result;
   }
 
   async getAllCrops(): Promise<GetAllCropsResponseDto[]> {

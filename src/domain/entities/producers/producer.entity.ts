@@ -29,7 +29,7 @@ export class Producer {
   name: string;
 
   @ApiProperty({
-    example: [ Farm ],
+    example: [Farm],
     type: [Farm],
     description: 'The farms of the producer',
   })

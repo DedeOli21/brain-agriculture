@@ -1,9 +1,12 @@
+import { CountByCropDto } from '@app/use-cases/crops/dtos/CountByCrop-response.dto';
+import { CreateCropResponseDto } from '@app/use-cases/crops/dtos/create-crop-response.dto';
+import { CreateCropDto } from '@app/use-cases/crops/dtos/create-crop.dto';
+import { FindCropByIdResponseDto } from '@app/use-cases/crops/dtos/FindCropById-response.dto';
 import { GetAllCropsResponseDto } from '@app/use-cases/crops/dtos/getAll-crop-response.dto';
-import { Crop } from 'src/domain/entities/crops/crop.entity';
 
 export abstract class ICropRepository {
-  create: (harvest: Partial<Crop>) => Promise<Crop>;
-  findById: (cropId: string) => Promise<Crop>;
-  countByCrop: () => Promise<any>;
+  create: (harvest: CreateCropDto) => Promise<CreateCropResponseDto>;
+  findById: (cropId: string) => Promise<FindCropByIdResponseDto>;
+  countByCrop: () => Promise<CountByCropDto[]>;
   getAllCrops: () => Promise<GetAllCropsResponseDto[]>;
 }

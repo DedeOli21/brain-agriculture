@@ -7,6 +7,7 @@ import { CreateFarmResponseDto } from '@app/use-cases/farms/dto/response/create-
 import { TotalAreaDto } from '@app/use-cases/farms/dto/response/totalArea-response.dto';
 import { CountByStateResponseDto } from '@app/use-cases/farms/dto/response/countByState-response.dto';
 import { TotalArableAndVegetationAreaDto } from '@app/use-cases/farms/dto/response/totalArable-response.dto';
+import { FindFarmResponseDto } from '@app/use-cases/farms/dto/response/findById-response.dto';
 
 export class FarmImplementation implements IFarmRepository {
   constructor(
@@ -16,10 +17,15 @@ export class FarmImplementation implements IFarmRepository {
 
   create(payload: CreateFarmRequestDto): Promise<CreateFarmResponseDto> {
     console.log('PAYLOAD', payload);
+
+    const farm = this.farmRepository.create({
+      ...payload,
+      seasons: [],
+    });
     return this.farmRepository.save(payload);
   }
 
-  findFarmByName(document: string): any {
+  findFarmByName(document: string): Promise<FindFarmResponseDto> {
     return this.farmRepository.findOneBy({ name: document });
   }
 

@@ -19,7 +19,7 @@ export class CreateCropUseCase {
 
     const crop = await this.cropRepository.create({
       name: data.name,
-      season,
+      seasonId: data.seasonId,
     });
 
     return crop;

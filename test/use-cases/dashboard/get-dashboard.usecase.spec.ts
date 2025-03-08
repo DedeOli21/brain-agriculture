@@ -71,8 +71,8 @@ describe('GetDashboardUseCase', () => {
       { state: 'State2', count: 5 },
     ];
     const cropsDistribution = [
-      { name: 'Crop1', count: 6 },
-      { name: 'Crop2', count: 4 },
+      { crop: 'Crop1', count: 6 },
+      { crop: 'Crop2', count: 4 },
     ];
     const landUsage = { arableArea: 600, vegetationArea: 400 };
 
@@ -100,8 +100,8 @@ describe('GetDashboardUseCase', () => {
       { state: 'State2', count: 5 },
     ];
     const cropsDistribution = [
-      { name: 'Crop1', count: 6 },
-      { name: 'Crop2', count: 4 },
+      { crop: 'Crop1', count: 6 },
+      { crop: 'Crop2', count: 4 },
     ];
     const landUsage = { arableArea: 0, vegetationArea: 0 };
 
@@ -133,8 +133,8 @@ describe('GetDashboardUseCase', () => {
       { state: 'State2', count: 5 },
     ];
     const cropsDistribution = [
-      { name: 'Crop1', count: 6 },
-      { name: 'Crop2', count: 4 },
+      { crop: 'Crop1', count: 6 },
+      { crop: 'Crop2', count: 4 },
     ];
     const landUsage = { arableArea: 600, vegetationArea: 400 };
 
@@ -192,8 +192,8 @@ describe('GetDashboardUseCase', () => {
       { state: 'State2', count: 5 },
     ];
     const cropsDistribution = [
-      { name: 'Crop1', count: 6 },
-      { name: 'Crop2', count: 4 },
+      { crop: 'Crop1', count: 6 },
+      { crop: 'Crop2', count: 4 },
     ];
     const landUsage = { arableArea: 600, vegetationArea: 400 };
 

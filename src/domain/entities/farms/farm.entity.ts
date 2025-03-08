@@ -35,7 +35,6 @@ export class Farm {
   @Column()
   city: string;
 
-
   @ApiProperty({
     example: 'SP',
     type: String,
@@ -77,7 +76,7 @@ export class Farm {
   producer: Producer;
 
   @ApiProperty({
-    example: [ Season ],
+    example: [Season],
     type: [Season],
     description: 'The seasons of the farm',
   })

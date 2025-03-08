@@ -50,10 +50,8 @@ const AppDataSource = new DataSource({
     : process.env.TYPEORM_DATABASE || 'brain_agriculture',
   entities: isProduction
     ? ['dist/domain/entities/**/*.entity.js']
-    : ['src/domain/entities/**/*.entity.ts'], 
-  migrations: isProduction
-    ? ['dist/migrations/*.js']
-    : ['src/migrations/*.ts'],
+    : ['src/domain/entities/**/*.entity.ts'],
+  migrations: isProduction ? ['dist/migrations/*.js'] : ['src/migrations/*.ts'],
   synchronize: false,
   migrationsRun: true,
 });

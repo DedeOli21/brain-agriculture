@@ -1,4 +1,12 @@
-import { Column, Entity, Index, OneToMany, Unique, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Index,
+  OneToMany,
+  Unique,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { BaseEntity } from '../../../shared/base.entity';
 import { Season } from '../season/season.entity';
 import { Harvest } from '../harvest/harvest.entity';
@@ -33,7 +41,7 @@ export class Crop extends BaseEntity {
   season: Season; // Qual safra essa cultura pertence
 
   @ApiProperty({
-    example: [ Harvest ],
+    example: [Harvest],
     type: [Harvest],
     description: 'The harvests of the crop',
   })

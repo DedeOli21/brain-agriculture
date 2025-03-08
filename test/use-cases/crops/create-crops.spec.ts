@@ -99,8 +99,16 @@ describe('CreateCropUseCase', () => {
     const result = await createCropUseCase.execute(data);
     expect(cropRepository.create).toHaveBeenCalledWith({
       name: data.name,
-      season,
+      seasonId: data.seasonId,
     });
     expect(result).toEqual(dataMockCrop);
+  });
+
+  it('should throw notFoundException if dont found season', async () => {
+    const data: CreateCropDto = { name: 'Wheat', seasonId: '123' };
+
+    jest.spyOn(seasonRepository, 'findById').mockResolvedValue(null);
+
+    expect(createCropUseCase.execute(data)).rejects.toThrow(NotFoundException);
   });
 });

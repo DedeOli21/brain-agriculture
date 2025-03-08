@@ -35,7 +35,6 @@ export class Season {
   @Column({ type: 'varchar', length: 4 })
   year: string;
 
-
   @ApiProperty({
     example: '1',
     description: 'Farm id',
