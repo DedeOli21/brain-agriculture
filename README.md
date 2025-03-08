@@ -54,6 +54,10 @@ A API fornece os seguintes recursos:
    yarn start:dev
    ```
 
+6. O Coverage da API
+![image](https://github.com/user-attachments/assets/269d85d5-8f03-4ed8-8818-201a4d950d27)
+
+
 ## Documentação da API
 A documentação da API está disponível via Swagger na URL:
 [**https://brain-agriculture-production.up.railway.app/api/docs**](https://brain-agriculture-production.up.railway.app/api/docs)
