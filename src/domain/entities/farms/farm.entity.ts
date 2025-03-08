@@ -73,7 +73,8 @@ export class Farm {
     description: 'the owner of the farm',
   })
   @ManyToOne(() => Producer, (producer) => producer.farms, { eager: false })
-  producer: Producer;
+  producerId: string;
+  // producerId: Producer;
 
   @ApiProperty({
     example: [Season],

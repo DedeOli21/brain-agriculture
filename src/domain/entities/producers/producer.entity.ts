@@ -33,6 +33,6 @@ export class Producer {
     type: [Farm],
     description: 'The farms of the producer',
   })
-  @OneToMany(() => Farm, (farm) => farm.producer)
+  @OneToMany(() => Farm, (farm) => farm.producerId)
   farms: Farm[];
 }
