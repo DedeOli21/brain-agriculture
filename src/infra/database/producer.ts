@@ -20,7 +20,7 @@ export class ProducerImplementation implements IProducerRepository {
   async create(
     payload: CreateProducerRequestDto,
   ): Promise<CreateProducerResponseDto> {
-const producer = this.producerRepository.create(payload);
+    const producer = this.producerRepository.create(payload);
     return this.producerRepository.save(producer);
   }
 

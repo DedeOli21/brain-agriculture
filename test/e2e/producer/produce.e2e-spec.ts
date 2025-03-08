@@ -2,7 +2,7 @@ import * as request from 'supertest';
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { DataSource } from 'typeorm';
-import { CreateProducerRequestDto } from '@app/use-cases/producers/dto/request/create-request.dto';
+import { CreateProducerRequestDto } from '../../../src/application/use-cases/producers/dto/request/create-request.dto';
 import { setupDataSource } from '../setup';
 import { AppModule } from '../../../src/app.module';
 
