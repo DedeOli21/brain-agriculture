@@ -51,10 +51,6 @@ export class ProducerImplementation implements IProducerRepository {
 
     const [producers, total] = await this.producerRepository
       .createQueryBuilder('producer')
-      .leftJoinAndSelect('producer.farms', 'farms')
-      .leftJoinAndSelect('farms.seasons', 'seasons')
-      .leftJoinAndSelect('seasons.crop', 'crops')
-      .leftJoinAndSelect('crops.harvests', 'harvests')
       .take(take)
       .skip(skip)
       .getManyAndCount();
