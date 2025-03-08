@@ -7,6 +7,7 @@ import { CountByCropDto } from '@app/use-cases/crops/dtos/CountByCrop-response.d
 import { FindCropByIdResponseDto } from '@app/use-cases/crops/dtos/FindCropById-response.dto';
 import { CreateCropResponseDto } from '@app/use-cases/crops/dtos/create-crop-response.dto';
 import { GetAllCropsResponseDto } from '@app/use-cases/crops/dtos/getAll-crop-response.dto';
+import { CreateCropDto } from '@app/use-cases/crops/dtos/create-crop.dto';
 
 @Injectable()
 export class CropImplementation implements ICropRepository {
@@ -15,8 +16,15 @@ export class CropImplementation implements ICropRepository {
     private readonly repository: Repository<Crop>,
   ) {}
 
-  async create(crop: Partial<Crop>): Promise<CreateCropResponseDto> {
-    return this.repository.save(crop);
+  async create(crop: CreateCropDto): Promise<CreateCropResponseDto> {
+    const mewCrop = this.repository.create({
+      ...crop,
+      season: crop.seasonId
+    });
+
+    console.log('NEW CROP', mewCrop);
+
+    return await this.repository.save(mewCrop);
   }
 
   async findById(id: string): Promise<FindCropByIdResponseDto> {

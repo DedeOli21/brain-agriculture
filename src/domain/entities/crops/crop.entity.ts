@@ -38,7 +38,7 @@ export class Crop extends BaseEntity {
     description: 'The description of the crop',
   })
   @ManyToOne(() => Season, (season) => season.crops)
-  season: Season; // Qual safra essa cultura pertence
+  season: string;
 
   @ApiProperty({
     example: [Harvest],

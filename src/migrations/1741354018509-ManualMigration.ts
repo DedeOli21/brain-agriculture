@@ -34,8 +34,6 @@ export class ManualMigration1741354018509 implements MigrationInterface {
       `CREATE TABLE crop (
                 id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
                 name varchar NOT NULL,
-                created_at timestamp NOT NULL,
-                updated_at timestamp NOT NULL,
                 season_id uuid NOT NULL REFERENCES season(id)
         )`,
     );
