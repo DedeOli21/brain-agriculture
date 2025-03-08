@@ -15,7 +15,7 @@ export class HarvestImplementation implements IHarvestRepository {
     console.log('HARVEST', harvest);
     const newHarvest = this.repository.create({
       ...harvest,
-      crop: { id: harvest.cropId }
+      crop: { id: harvest.crop.id }
     });
   
     return this.repository.save(newHarvest);
