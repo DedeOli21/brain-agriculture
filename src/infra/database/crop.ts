@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICropRepository } from '@domain/interfaces/crop.repository.interface';
 import { Crop } from '@domain/entities/crops/crop.entity';
-import { Repository } from 'typeorm';
+import { QueryBuilder, Repository } from 'typeorm';
 import { CountByCropDto } from '@app/use-cases/crops/dtos/CountByCrop-response.dto';
 import { FindCropByIdResponseDto } from '@app/use-cases/crops/dtos/FindCropById-response.dto';
 import { CreateCropResponseDto } from '@app/use-cases/crops/dtos/create-crop-response.dto';
@@ -24,7 +24,9 @@ export class CropImplementation implements ICropRepository {
 
     console.log('NEW CROP', mewCrop);
 
-    return await this.repository.save(mewCrop);
+    const result = await this.repository.createQueryBuilder().insert().values(mewCrop).execute();
+
+    return result.raw;
   }
 
   async findById(id: string): Promise<FindCropByIdResponseDto> {
