@@ -34,5 +34,8 @@ export class Harvest {
     type: String,
   })
   @ManyToOne(() => Crop, (crop) => crop.harvests)
-  crop: Crop; // Qual cultura essa colheita pertence
+  crop: Crop;
+
+  @Column({ type: 'uuid' })
+  cropId: string;
 }

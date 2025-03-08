@@ -12,6 +12,11 @@ export class HarvestImplementation implements IHarvestRepository {
   ) {}
 
   async create(harvest: Partial<Harvest>): Promise<Harvest> {
-    return this.repository.save(harvest);
+    const newHarvest = this.repository.create({
+      ...harvest,
+      crop: { id: harvest.cropId }
+    });
+  
+    return this.repository.save(newHarvest);
   }
 }
