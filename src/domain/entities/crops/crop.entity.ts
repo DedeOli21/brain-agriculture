@@ -37,7 +37,7 @@ export class Crop extends BaseEntity {
     type: String,
     description: 'The description of the crop',
   })
-  @ManyToOne(() => Season, (season) => season.crops, { eager: false })
+  @ManyToOne(() => Season, (season) => season.crops, { cascade: false })
   season: string;
 
   @ApiProperty({
